@@ -12,14 +12,14 @@ import org.hibernate.annotations.Where;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="institutions_types")
+@Table(name="locations")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-@SQLDelete(sql = "UPDATE institutions_types SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
+@SQLDelete(sql = "UPDATE locations SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
-public class InstitutionTypeEntity {
+public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface InstitutionTypeRepository extends JpaRepository<InstitutionTypeEntity,Integer> {
     @Query(
-            value = "SELECT * FROM communes c WHERE c.deleted_at IS NOT NULL",
+            value = "SELECT * FROM institutions_types c WHERE c.deleted_at IS NOT NULL",
             nativeQuery = true
     )
     List<InstitutionTypeEntity> findAllDeleted();
@@ -22,10 +22,10 @@ public interface InstitutionTypeRepository extends JpaRepository<InstitutionType
     @Query("SELECT ur FROM InstitutionTypeEntity ur WHERE ur.deletedAt IS NULL")
     List<InstitutionTypeEntity> findAllActive();
 
-    @Query(value = "SELECT * FROM communes c WHERE c.id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM institutions_types c WHERE c.id = :id", nativeQuery = true)
     Optional<InstitutionTypeEntity> findAnyById(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM communes", nativeQuery = true)
+    @Query(value = "SELECT * FROM institutions_types", nativeQuery = true)
     List<InstitutionTypeEntity> findAllIncludingDeleted();
 
     @Query("SELECT c FROM InstitutionTypeEntity c")
