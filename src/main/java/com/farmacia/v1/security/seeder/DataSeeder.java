@@ -24,15 +24,15 @@ public class DataSeeder implements CommandLineRunner {
         // Crea usuarios (password BCrypt)
         UserEntity u1 = userRepository.save(UserEntity.builder()
                 .username("admin")
-                .password(passwordEncoder.encode("Admin123$"))
-                .email("admin@demo.com")
+                .password(passwordEncoder.encode("Secret123$"))
+                .email("administrator@redsalud.gob.cl")
                 .firstName("Admin")
                 .build());
 
         UserEntity u2 = userRepository.save(UserEntity.builder()
                 .username("operador")
-                .password(passwordEncoder.encode("Operador123$"))
-                .email("operador@demo.com")
+                .password(passwordEncoder.encode("Secret123$"))
+                .email("administrative@redsalud.gob.cl")
                 .firstName("Operador")
                 .build());
 
