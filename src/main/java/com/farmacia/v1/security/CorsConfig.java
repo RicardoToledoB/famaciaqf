@@ -19,6 +19,7 @@ public class CorsConfig {
         // 🔒 Dominios permitidos (ajusta a los tuyos reales)
         config.setAllowedOriginPatterns(List.of(
                 "http://localhost:4200",
+                "http://localhost:5173",
                 "https://*.up.railway.app",
                 "https://*"
         ));
