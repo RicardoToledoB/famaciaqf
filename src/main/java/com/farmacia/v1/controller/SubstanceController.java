@@ -1,8 +1,8 @@
 package com.farmacia.v1.controller;
 
-import com.farmacia.v1.dto.PoliceDTO;
-import com.farmacia.v1.service.impl.GradeServiceImpl;
-import com.farmacia.v1.service.impl.PoliceServiceImpl;
+import com.farmacia.v1.dto.SubstanceDTO;
+import com.farmacia.v1.service.impl.CommuneServiceImpl;
+import com.farmacia.v1.service.impl.SubstanceServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,44 +15,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/polices")
+@RequestMapping("/api/v1/substances")
 @PreAuthorize("hasRole('ADMIN')")
-public class PoliceController {
+public class SubstanceController {
 
     @Autowired
-    private PoliceServiceImpl service;
+    private SubstanceServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<PoliceDTO> create(@RequestBody PoliceDTO dto) {
+    public ResponseEntity<SubstanceDTO> create(@RequestBody SubstanceDTO dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<PoliceDTO>> getAll() {
+    public ResponseEntity<List<SubstanceDTO>> getAll() {
         return ResponseEntity.ok(service.listAll());
     }
 
 
     @GetMapping("/getAllPaginated")
-    public ResponseEntity<Page<PoliceDTO>> getAllPaginated(
+    public ResponseEntity<Page<SubstanceDTO>> getAllPaginated(
             @RequestParam(required = false) String name,
             @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(service.getAllPaginated(name, pageable));
     }
 
-    @GetMapping("/findByRut/{rut}")
-    public ResponseEntity<Page<PoliceDTO>> findByRut(@PathVariable String rut,
-            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
-        return ResponseEntity.ok(service.getAllPaginated(rut, pageable));
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<PoliceDTO> getById(@PathVariable Integer id) {
+    public ResponseEntity<SubstanceDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PoliceDTO> update(@PathVariable Integer id, @RequestBody PoliceDTO dto) {
+    public ResponseEntity<SubstanceDTO> update(@PathVariable Integer id, @RequestBody SubstanceDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -64,12 +58,12 @@ public class PoliceController {
 
     /* SOFT DELETE */
     @GetMapping
-    public ResponseEntity<List<PoliceDTO>> listActive() {
+    public ResponseEntity<List<SubstanceDTO>> listActive() {
         return ResponseEntity.ok(service.listActive());
     }
 
     @GetMapping("/deleted")
-    public ResponseEntity<List<PoliceDTO>> listDeleted() {
+    public ResponseEntity<List<SubstanceDTO>> listDeleted() {
         return ResponseEntity.ok(service.listDeleted());
     }
 

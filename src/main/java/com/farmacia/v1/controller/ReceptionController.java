@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reception")
+@RequestMapping("/api/v1/receptions")
 @PreAuthorize("hasRole('ADMIN')")
 public class ReceptionController {
 

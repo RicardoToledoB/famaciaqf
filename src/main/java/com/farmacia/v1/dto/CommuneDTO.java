@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 public class CommuneDTO {
     private Integer id;
     private String name;
+    private String description;
+    private InstitutionTypeDTO institutionType;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

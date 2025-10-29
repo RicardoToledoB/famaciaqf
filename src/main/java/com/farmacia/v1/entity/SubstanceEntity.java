@@ -23,17 +23,31 @@ public class SubstanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String nue;
     @Column(columnDefinition = "TEXT")
     private String description;
+    private String weight;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="reception_id")
+    private ReceptionEntity reception;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="substance_type_id")
+    private SubstanceTypeEntity substanceType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="packaging_id")
+    private PackagingEntity packaging;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="commune_id")
+    private CommuneEntity commune;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="institution_type_id")
-    private InstitutionTypeEntity institutionType;
 
     @PrePersist
     private void createdAt(){

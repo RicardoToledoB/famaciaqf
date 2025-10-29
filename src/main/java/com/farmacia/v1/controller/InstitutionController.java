@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/institution")
+@RequestMapping("/api/v1/institutions")
 @PreAuthorize("hasRole('ADMIN')")
 public class InstitutionController {
 
