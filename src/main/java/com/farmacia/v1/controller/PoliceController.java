@@ -40,6 +40,12 @@ public class PoliceController {
         return ResponseEntity.ok(service.getAllPaginated(name, pageable));
     }
 
+    @GetMapping("/findByRut/{rut}")
+    public ResponseEntity<Page<PoliceDTO>> findByRut(@PathVariable String rut,
+            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(service.getAllPaginated(rut, pageable));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PoliceDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));
