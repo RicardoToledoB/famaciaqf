@@ -28,13 +28,9 @@ public class InstitutionEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="institution_type_id")
-    private InstitutionTypeEntity institutionType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="commune_id")
-    private CommuneEntity commune;
+
+
 
     @PrePersist
     private void createdAt(){

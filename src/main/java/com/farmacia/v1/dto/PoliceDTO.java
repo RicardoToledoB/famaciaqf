@@ -2,6 +2,7 @@ package com.farmacia.v1.dto;
 
 import com.farmacia.v1.entity.GradeEntity;
 import com.farmacia.v1.entity.InstitutionEntity;
+import com.farmacia.v1.entity.InstitutionTypeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -26,7 +27,7 @@ public class PoliceDTO {
     private String rut;
     private String email;
     private String cellphone;
-    private InstitutionDTO institution;
+    private InstitutionTypeDTO institutionType;
     private GradeDTO grade;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

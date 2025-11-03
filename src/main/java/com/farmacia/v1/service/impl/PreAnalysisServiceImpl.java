@@ -140,7 +140,6 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .build();
     }
 
-
     private PoliceDTO mapToPoliceDTO(PoliceEntity entity) {
         return PoliceDTO.builder()
                 .id(entity.getId())
@@ -151,7 +150,7 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .rut(entity.getRut())
                 .email(entity.getEmail())
                 .cellphone(entity.getCellphone())
-                .institution(mapToInstitutionDTO(entity.getInstitution()))
+                .institutionType(mapToInstitutionTypeDTO(entity.getInstitutionType()))
                 .grade(mapToGradeDTO(entity.getGrade()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
@@ -169,33 +168,8 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .rut(dto.getRut())
                 .email(dto.getEmail())
                 .cellphone(dto.getCellphone())
-                .institution(mapToInstitutionEntity(dto.getInstitution()))
-                .grade(mapToGradeEntity(dto.getGrade()))
-                .createdAt(dto.getCreatedAt())
-                .updatedAt(dto.getUpdatedAt())
-                .deletedAt(dto.getDeletedAt())
-                .build();
-    }
-
-
-    private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
-        return InstitutionDTO.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .institutionType(mapToInstitutionTypeDTO(entity.getInstitutionType()))
-                .commune(mapToCommuneDTO(entity.getCommune()))
-                .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
-                .deletedAt(entity.getDeletedAt())
-                .build();
-    }
-
-    private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
-        return InstitutionEntity.builder()
-                .id(dto.getId())
-                .name(dto.getName())
                 .institutionType(mapToInstitutionTypeEntity(dto.getInstitutionType()))
-                .commune(mapToCommuneEntity(dto.getCommune()))
+                .grade(mapToGradeEntity(dto.getGrade()))
                 .createdAt(dto.getCreatedAt())
                 .updatedAt(dto.getUpdatedAt())
                 .deletedAt(dto.getDeletedAt())
@@ -206,6 +180,8 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
         return InstitutionTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .commune(mapToCommuneDTO(entity.getCommune()))
+                .institution(mapToInstitutionDTO(entity.getInstitution()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
@@ -216,11 +192,15 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
         return InstitutionTypeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
+                .commune(mapToCommuneEntity(dto.getCommune()))
+                .institution(mapToInstitutionEntity(dto.getInstitution()))
                 .createdAt(dto.getCreatedAt())
                 .updatedAt(dto.getUpdatedAt())
                 .deletedAt(dto.getDeletedAt())
                 .build();
     }
+
+
 
     private CommuneDTO mapToCommuneDTO(CommuneEntity entity) {
         return CommuneDTO.builder()
@@ -241,6 +221,28 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .deletedAt(dto.getDeletedAt())
                 .build();
     }
+
+
+    private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
+        return InstitutionDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
+        return InstitutionEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
 
 
 
@@ -267,6 +269,8 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .deletedAt(dto.getDeletedAt())
                 .build();
     }
+
+
 
     private UserDTO mapToUserDTO(UserEntity entity) {
         return UserDTO.builder()

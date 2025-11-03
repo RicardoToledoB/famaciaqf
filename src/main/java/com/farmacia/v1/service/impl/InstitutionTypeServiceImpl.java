@@ -1,6 +1,10 @@
 package com.farmacia.v1.service.impl;
 
+import com.farmacia.v1.dto.CommuneDTO;
+import com.farmacia.v1.dto.InstitutionDTO;
 import com.farmacia.v1.dto.InstitutionTypeDTO;
+import com.farmacia.v1.entity.CommuneEntity;
+import com.farmacia.v1.entity.InstitutionEntity;
 import com.farmacia.v1.entity.InstitutionTypeEntity;
 import com.farmacia.v1.repository.CommuneRepository;
 import com.farmacia.v1.repository.InstitutionTypeRepository;
@@ -25,6 +29,8 @@ public class InstitutionTypeServiceImpl implements IInstitutionTypeService {
         return InstitutionTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .commune(mapToCommuneDTO(entity.getCommune()))
+                .institution(mapToInstitutionDTO(entity.getInstitution()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
@@ -33,6 +39,51 @@ public class InstitutionTypeServiceImpl implements IInstitutionTypeService {
 
     private InstitutionTypeEntity mapToEntity(InstitutionTypeDTO dto) {
         return InstitutionTypeEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .commune(mapToCommuneEntity(dto.getCommune()))
+                .institution(mapToInstitutionEntity(dto.getInstitution()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+
+    private CommuneDTO mapToCommuneDTO(CommuneEntity entity) {
+        return CommuneDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private CommuneEntity mapToCommuneEntity(CommuneDTO dto) {
+        return CommuneEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+    private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
+        return InstitutionDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
+        return InstitutionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .createdAt(dto.getCreatedAt())
@@ -51,6 +102,8 @@ public class InstitutionTypeServiceImpl implements IInstitutionTypeService {
         InstitutionTypeEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setName(dto.getName());
+        entity.setCommune(mapToCommuneEntity(dto.getCommune()));
+        entity.setInstitution(mapToInstitutionEntity(dto.getInstitution()));
         return mapToDTO(repository.save(entity));
     }
 

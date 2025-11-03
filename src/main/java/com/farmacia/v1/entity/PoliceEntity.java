@@ -32,8 +32,8 @@ public class PoliceEntity {
     private String cellphone;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="institution_id")
-    private InstitutionEntity institution;
+    @JoinColumn(name="institution_type_id")
+    private InstitutionTypeEntity institutionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="grade_id")
