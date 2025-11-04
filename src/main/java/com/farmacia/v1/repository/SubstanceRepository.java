@@ -37,4 +37,7 @@ public interface SubstanceRepository extends JpaRepository<SubstanceEntity,Integ
               OR LOWER(c.nue) LIKE LOWER(CONCAT('%', :nue, '%')))
     """)
     Page<SubstanceEntity> search(@Param("nue") String nue, Pageable pageable);
+
+    @Query("SELECT s FROM SubstanceEntity s WHERE s.reception.id = :receptionId")
+    List<SubstanceEntity> findAllByReceptionId(@Param("receptionId") Integer receptionId);
 }

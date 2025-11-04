@@ -1,8 +1,8 @@
 package com.farmacia.v1.controller;
 
-import com.farmacia.v1.dto.SubstanceDTO;
-import com.farmacia.v1.service.impl.CommuneServiceImpl;
-import com.farmacia.v1.service.impl.SubstanceServiceImpl;
+import com.farmacia.v1.dto.DestructionHeaderDTO;
+import com.farmacia.v1.service.impl.DestructionHeaderServiceImpl;
+import com.farmacia.v1.service.impl.GradeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,43 +15,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/substances")
+@RequestMapping("/api/v1/destructions_headers")
 @PreAuthorize("hasRole('ADMIN')")
-public class SubstanceController {
+public class DestructionHeaderController {
 
     @Autowired
-    private SubstanceServiceImpl service;
+    private DestructionHeaderServiceImpl service;
 
     @PostMapping
-    public ResponseEntity<SubstanceDTO> create(@RequestBody SubstanceDTO dto) {
+    public ResponseEntity<DestructionHeaderDTO> create(@RequestBody DestructionHeaderDTO dto) {
         return ResponseEntity.ok(service.create(dto));
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<SubstanceDTO>> getAll() {
+    public ResponseEntity<List<DestructionHeaderDTO>> getAll() {
         return ResponseEntity.ok(service.listAll());
-    }
-
-    @GetMapping("/findByReceptionId/{id}")
-    public ResponseEntity<List<SubstanceDTO>> getAll(@PathVariable Integer id) {
-        return ResponseEntity.ok(service.findByReceptionId(id));
     }
 
 
     @GetMapping("/getAllPaginated")
-    public ResponseEntity<Page<SubstanceDTO>> getAllPaginated(
+    public ResponseEntity<Page<DestructionHeaderDTO>> getAllPaginated(
             @RequestParam(required = false) String name,
             @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
         return ResponseEntity.ok(service.getAllPaginated(name, pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<SubstanceDTO> getById(@PathVariable Integer id) {
+    public ResponseEntity<DestructionHeaderDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SubstanceDTO> update(@PathVariable Integer id, @RequestBody SubstanceDTO dto) {
+    public ResponseEntity<DestructionHeaderDTO> update(@PathVariable Integer id, @RequestBody DestructionHeaderDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -63,12 +58,12 @@ public class SubstanceController {
 
     /* SOFT DELETE */
     @GetMapping
-    public ResponseEntity<List<SubstanceDTO>> listActive() {
+    public ResponseEntity<List<DestructionHeaderDTO>> listActive() {
         return ResponseEntity.ok(service.listActive());
     }
 
     @GetMapping("/deleted")
-    public ResponseEntity<List<SubstanceDTO>> listDeleted() {
+    public ResponseEntity<List<DestructionHeaderDTO>> listDeleted() {
         return ResponseEntity.ok(service.listDeleted());
     }
 

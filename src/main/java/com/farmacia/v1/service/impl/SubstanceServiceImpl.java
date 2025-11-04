@@ -347,6 +347,12 @@ public class SubstanceServiceImpl implements ISubstanceService {
                 .collect(Collectors.toList());
     }
 
+    public List<SubstanceDTO> findByReceptionId(Integer id) {
+        return repository.findAllByReceptionId(id).stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void delete(Integer id) {
         repository.deleteById(id);

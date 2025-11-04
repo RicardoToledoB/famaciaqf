@@ -38,4 +38,6 @@ public interface ReceptionRepository extends JpaRepository<ReceptionEntity,Integ
               OR LOWER(c.number) LIKE LOWER(CONCAT('%', :number, '%')))
     """)
     Page<ReceptionEntity> search(@Param("number") String number, Pageable pageable);
+
+
 }
