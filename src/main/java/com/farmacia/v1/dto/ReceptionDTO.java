@@ -24,6 +24,7 @@ public class ReceptionDTO {
     private String date_reception;
     private String of_number;
     private String of_number_date;
+    private String state;
     private LocationDTO location;
     private PoliceDTO police;
     private UserDTO user_origin;

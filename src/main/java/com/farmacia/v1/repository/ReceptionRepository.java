@@ -1,7 +1,6 @@
 package com.farmacia.v1.repository;
 
 import com.farmacia.v1.entity.ReceptionEntity;
-import com.farmacia.v1.entity.ReceptionEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

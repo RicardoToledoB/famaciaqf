@@ -3,9 +3,9 @@ package com.farmacia.v1.service.impl;
 import com.farmacia.v1.dto.*;
 import com.farmacia.v1.entity.*;
 import com.farmacia.v1.repository.GradeRepository;
-import com.farmacia.v1.repository.ReceptionRepository;
+import com.farmacia.v1.repository.ReceptionHistoryRepository;
 import com.farmacia.v1.service.IGradeService;
-import com.farmacia.v1.service.IReceptionService;
+import com.farmacia.v1.service.IReceptionHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +15,38 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ReceptionServiceImpl implements IReceptionService {
+public class ReceptionHistoryServiceImpl implements IReceptionHistoryService {
 
     @Autowired
-    private ReceptionRepository repository;
+    private ReceptionHistoryRepository repository;
 
 
-    private ReceptionDTO mapToDTO(ReceptionEntity entity) {
+    private ReceptionHistoryDTO mapToDTO(ReceptionHistoryEntity entity) {
+        return ReceptionHistoryDTO.builder()
+                .id(entity.getId())
+                .description(entity.getDescription())
+                .reception(mapToReceptionDTO(entity.getReception()))
+                .user(mapToUserDTO(entity.getUser()))
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private ReceptionHistoryEntity mapToEntity(ReceptionHistoryDTO dto) {
+        return ReceptionHistoryEntity.builder()
+                .id(dto.getId())
+                .description(dto.getDescription())
+                .reception(mapToReceptionEntity(dto.getReception()))
+                .user(mapToUserEntity(dto.getUser()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+    private ReceptionDTO mapToReceptionDTO(ReceptionEntity entity) {
         return ReceptionDTO.builder()
                 .id(entity.getId())
                 .number(entity.getNumber())
@@ -39,7 +64,7 @@ public class ReceptionServiceImpl implements IReceptionService {
                 .build();
     }
 
-    private ReceptionEntity mapToEntity(ReceptionDTO dto) {
+    private ReceptionEntity mapToReceptionEntity(ReceptionDTO dto) {
         return ReceptionEntity.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())
@@ -244,36 +269,31 @@ public class ReceptionServiceImpl implements IReceptionService {
 
 
 
-    public ReceptionDTO create(ReceptionDTO dto) {
-        ReceptionEntity entity = repository.save(mapToEntity(dto));
+
+    public ReceptionHistoryDTO create(ReceptionHistoryDTO dto) {
+        ReceptionHistoryEntity entity = repository.save(mapToEntity(dto));
         return mapToDTO(entity);
     }
 
     @Override
-    public ReceptionDTO update(Integer id, ReceptionDTO dto) {
-        ReceptionEntity entity = repository.findById(id)
+    public ReceptionHistoryDTO update(Integer id, ReceptionHistoryDTO dto) {
+        ReceptionHistoryEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        entity.setNumber(dto.getNumber());
-        entity.setDate_reception(dto.getDate_reception());
-        entity.setOf_number(dto.getOf_number());
-        entity.setOf_number_date(dto.getOf_number_date());
-        entity.setState(entity.getState());
-        entity.setLocation(mapToLocationEntity(dto.getLocation()));
-        entity.setPolice(mapToPoliceEntity(dto.getPolice()));
-        entity.setUser_origin(mapToUserEntity(dto.getUser_origin()));
-        entity.setUser_destination(mapToUserEntity(dto.getUser_destination()));
+        entity.setDescription(entity.getDescription());
+        entity.setReception(mapToReceptionEntity(dto.getReception()));
+        entity.setUser(mapToUserEntity(dto.getUser()));
         return mapToDTO(repository.save(entity));
     }
 
     @Override
-    public ReceptionDTO getById(Integer id) {
-        ReceptionEntity entity = repository.findById(id)
+    public ReceptionHistoryDTO getById(Integer id) {
+        ReceptionHistoryEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         return mapToDTO(entity);
     }
 
     @Override
-    public List<ReceptionDTO> getAll() {
+    public List<ReceptionHistoryDTO> getAll() {
         return repository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -283,12 +303,12 @@ public class ReceptionServiceImpl implements IReceptionService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
-    public Page<ReceptionDTO> getAllPaginated(Pageable pageable) {
+    public Page<ReceptionHistoryDTO> getAllPaginated(Pageable pageable) {
         return repository.findAllPaginated(pageable)
                 .map(this::mapToDTO);
     }
 
-    public Page<ReceptionDTO> getAllPaginated(String name, Pageable pageable) {
+    public Page<ReceptionHistoryDTO> getAllPaginated(String name, Pageable pageable) {
         return repository.search(name, pageable).map(this::mapToDTO);
     }
 
@@ -297,14 +317,14 @@ public class ReceptionServiceImpl implements IReceptionService {
 
 
     /*Listar communas activas*/
-    public List<ReceptionDTO> listAll() {
+    public List<ReceptionHistoryDTO> listAll() {
         return repository.findAllIncludingDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
 
-    public List<ReceptionDTO> listActive() {
+    public List<ReceptionHistoryDTO> listActive() {
         return repository.findAllActive().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -312,14 +332,14 @@ public class ReceptionServiceImpl implements IReceptionService {
 
 
 
-    public List<ReceptionDTO> listDeleted() {
+    public List<ReceptionHistoryDTO> listDeleted() {
         return repository.findAllDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public void restore(Integer id) {
-        ReceptionEntity entity = repository.findAnyById(id)
+        ReceptionHistoryEntity entity = repository.findAnyById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setDeletedAt(null);
         repository.save(entity);

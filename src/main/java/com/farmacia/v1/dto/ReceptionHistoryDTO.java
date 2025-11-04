@@ -1,5 +1,11 @@
 package com.farmacia.v1.dto;
 
+import com.farmacia.v1.entity.ReceptionEntity;
+import com.farmacia.v1.entity.UserEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +17,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class SubstanceDTO {
+public class ReceptionHistoryDTO {
     private Integer id;
-    private String nue;
     private String description;
-    private String weight;
     private ReceptionDTO reception;
-    private SubstanceTypeDTO substanceType;
-    private PackagingDTO packaging;
-    private CommuneDTO commune;
+    private UserDTO user;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
