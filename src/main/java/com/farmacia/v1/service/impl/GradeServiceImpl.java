@@ -2,9 +2,11 @@ package com.farmacia.v1.service.impl;
 
 import com.farmacia.v1.dto.CommuneDTO;
 import com.farmacia.v1.dto.GradeDTO;
+import com.farmacia.v1.dto.InstitutionDTO;
 import com.farmacia.v1.dto.InstitutionTypeDTO;
 import com.farmacia.v1.entity.CommuneEntity;
 import com.farmacia.v1.entity.GradeEntity;
+import com.farmacia.v1.entity.InstitutionEntity;
 import com.farmacia.v1.entity.InstitutionTypeEntity;
 import com.farmacia.v1.repository.GradeRepository;
 import com.farmacia.v1.repository.InstitutionRepository;
@@ -53,6 +55,8 @@ public class GradeServiceImpl implements IGradeService {
         return InstitutionTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
+                .commune(mapToCommuneDTO(entity.getCommune()))
+                .institution(mapToInstitutionDTO(entity.getInstitution()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
@@ -61,6 +65,51 @@ public class GradeServiceImpl implements IGradeService {
 
     private InstitutionTypeEntity mapToInstitutionTypeEntity(InstitutionTypeDTO dto) {
         return InstitutionTypeEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .commune(mapToCommuneEntity(dto.getCommune()))
+                .institution(mapToInstitutionEntity(dto.getInstitution()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+
+    private CommuneDTO mapToCommuneDTO(CommuneEntity entity) {
+        return CommuneDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private CommuneEntity mapToCommuneEntity(CommuneDTO dto) {
+        return CommuneEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+    private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
+        return InstitutionDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
+        return InstitutionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
                 .createdAt(dto.getCreatedAt())
