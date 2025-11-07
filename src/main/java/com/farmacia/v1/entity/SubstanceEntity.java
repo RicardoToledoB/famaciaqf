@@ -28,6 +28,9 @@ public class SubstanceEntity {
     private String description;
     private String weight;
 
+    private String weight_net;
+    private String unity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="reception_id")
     private ReceptionEntity reception;

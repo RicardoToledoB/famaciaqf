@@ -16,6 +16,8 @@ public class SubstanceDTO {
     private String nue;
     private String description;
     private String weight;
+    private String weight_net;
+    private String unity;
     private ReceptionDTO reception;
     private SubstanceTypeDTO substanceType;
     private PackagingDTO packaging;
