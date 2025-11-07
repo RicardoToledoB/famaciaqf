@@ -299,6 +299,12 @@ public class ReceptionHistoryServiceImpl implements IReceptionHistoryService {
                 .collect(Collectors.toList());
     }
 
+    public List<ReceptionHistoryDTO> findByReceptionId(Integer id) {
+        return repository.findByReception_Id(id).stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void delete(Integer id) {
         repository.deleteById(id);

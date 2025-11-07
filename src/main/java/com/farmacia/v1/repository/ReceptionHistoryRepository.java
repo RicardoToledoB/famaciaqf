@@ -38,4 +38,7 @@ public interface ReceptionHistoryRepository extends JpaRepository<ReceptionHisto
               OR LOWER(c.description) LIKE LOWER(CONCAT('%', :description, '%')))
     """)
     Page<ReceptionHistoryEntity> search(@Param("description") String name, Pageable pageable);
+
+    List<ReceptionHistoryEntity> findByReception_Id(Integer receptionId);
+
 }

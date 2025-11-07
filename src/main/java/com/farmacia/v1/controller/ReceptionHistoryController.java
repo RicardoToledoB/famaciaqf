@@ -32,6 +32,11 @@ public class ReceptionHistoryController {
         return ResponseEntity.ok(service.listAll());
     }
 
+    @GetMapping("/findByReceptionId/{id}")
+    public ResponseEntity<List<ReceptionHistoryDTO>> findByReceptionId(@PathVariable Integer id) {
+        return ResponseEntity.ok(service.findByReceptionId(id));
+    }
+
 
     @GetMapping("/getAllPaginated")
     public ResponseEntity<Page<ReceptionHistoryDTO>> getAllPaginated(
