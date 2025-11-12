@@ -257,11 +257,12 @@ public class ReceptionServiceImpl implements IReceptionService {
         entity.setDate_reception(dto.getDate_reception());
         entity.setOf_number(dto.getOf_number());
         entity.setOf_number_date(dto.getOf_number_date());
-        entity.setState(entity.getState());
+        entity.setState(dto.getState());
         entity.setLocation(mapToLocationEntity(dto.getLocation()));
         entity.setPolice(mapToPoliceEntity(dto.getPolice()));
         entity.setUser_origin(mapToUserEntity(dto.getUser_origin()));
         entity.setUser_destination(mapToUserEntity(dto.getUser_destination()));
+
         return mapToDTO(repository.save(entity));
     }
 
