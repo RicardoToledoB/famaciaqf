@@ -39,4 +39,12 @@ public interface ReceptionRepository extends JpaRepository<ReceptionEntity,Integ
     Page<ReceptionEntity> search(@Param("number") String number, Pageable pageable);
 
 
+    @Query("""
+       SELECT c FROM ReceptionEntity c
+       WHERE (:state IS NULL OR TRIM(:state) = '' 
+              OR LOWER(c.state) LIKE LOWER(CONCAT('%', :state, '%')))
+    """)
+    Page<ReceptionEntity> searchByState(@Param("state") String state, Pageable pageable);
+
+
 }

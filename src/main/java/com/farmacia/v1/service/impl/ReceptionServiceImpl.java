@@ -29,6 +29,7 @@ public class ReceptionServiceImpl implements IReceptionService {
                 .of_number(entity.getOf_number())
                 .of_number_date(entity.getOf_number_date())
                 .state(entity.getState())
+                .is_editable(entity.getIs_editable())
                 .location(mapToLocationDTO(entity.getLocation()))
                 .police(mapToPoliceDTO(entity.getPolice()))
                 .user_origin(mapToUserDTO(entity.getUser_origin()))
@@ -47,6 +48,7 @@ public class ReceptionServiceImpl implements IReceptionService {
                 .of_number(dto.getOf_number())
                 .of_number_date(dto.getOf_number_date())
                 .state(dto.getState())
+                .is_editable(dto.getIs_editable())
                 .location(mapToLocationEntity(dto.getLocation()))
                 .police(mapToPoliceEntity(dto.getPolice()))
                 .user_origin(mapToUserEntity(dto.getUser_origin()))
@@ -258,6 +260,7 @@ public class ReceptionServiceImpl implements IReceptionService {
         entity.setOf_number(dto.getOf_number());
         entity.setOf_number_date(dto.getOf_number_date());
         entity.setState(dto.getState());
+        entity.setIs_editable(dto.getIs_editable());
         entity.setLocation(mapToLocationEntity(dto.getLocation()));
         entity.setPolice(mapToPoliceEntity(dto.getPolice()));
         entity.setUser_origin(mapToUserEntity(dto.getUser_origin()));
@@ -292,6 +295,12 @@ public class ReceptionServiceImpl implements IReceptionService {
     public Page<ReceptionDTO> getAllPaginated(String name, Pageable pageable) {
         return repository.search(name, pageable).map(this::mapToDTO);
     }
+
+    //searchByState
+    public Page<ReceptionDTO> getAllPaginatedByState(String state, Pageable pageable) {
+        return repository.searchByState(state, pageable).map(this::mapToDTO);
+    }
+
 
 
 

@@ -28,6 +28,7 @@ public class ReceptionEntity {
     private String of_number;
     private String of_number_date;
     private String state;
+    private String is_editable;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="location_id")
