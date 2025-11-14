@@ -47,6 +47,8 @@ public class SubstanceEntity {
     @JoinColumn(name="commune_id")
     private CommuneEntity commune;
 
+    private String state;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")

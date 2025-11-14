@@ -18,6 +18,8 @@ public class SubstanceDTO {
     private String weight;
     private String weight_net;
     private String unity;
+    private String state;
+
     private ReceptionDTO reception;
     private SubstanceTypeDTO substanceType;
     private PackagingDTO packaging;

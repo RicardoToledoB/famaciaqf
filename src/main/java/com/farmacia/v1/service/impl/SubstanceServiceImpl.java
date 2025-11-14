@@ -29,6 +29,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
                 .weight(entity.getWeight())
                 .weight_net(entity.getWeight_net())
                 .unity(entity.getUnity())
+                .state(entity.getState())
                 .reception(mapToReceptionDTO(entity.getReception()))
                 .substanceType(mapToSubstanceTypeDTO(entity.getSubstanceType()))
                 .packaging(mapToPackagingDTO(entity.getPackaging()))
@@ -47,6 +48,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
                 .weight(dto.getWeight())
                 .weight_net(dto.getWeight_net())
                 .unity(dto.getUnity())
+                .state(dto.getState())
                 .reception(mapToReceptionEntity(dto.getReception()))
                 .substanceType(mapToSubstanceTypeEntity(dto.getSubstanceType()))
                 .packaging(mapToPackagingEntity(dto.getPackaging()))
@@ -332,6 +334,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
         entity.setWeight(dto.getWeight());
         entity.setWeight_net(dto.getWeight_net());
         entity.setUnity(dto.getUnity());
+        entity.setState(dto.getState());
         entity.setReception(mapToReceptionEntity(dto.getReception()));
         entity.setSubstanceType(mapToSubstanceTypeEntity(dto.getSubstanceType()));
         entity.setPackaging(mapToPackagingEntity(dto.getPackaging()));
@@ -373,6 +376,10 @@ public class SubstanceServiceImpl implements ISubstanceService {
     }
 
 
+
+    public Page<SubstanceDTO> getAllPaginatedByState(String state, Pageable pageable) {
+        return repository.searchByState(state, pageable).map(this::mapToDTO);
+    }
 
 
 

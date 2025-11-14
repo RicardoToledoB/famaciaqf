@@ -45,6 +45,15 @@ public class SubstanceController {
         return ResponseEntity.ok(service.getAllPaginated(name, pageable));
     }
 
+    //getAllPaginatedByState
+
+    @GetMapping("/getAllPaginatedByState")
+    public ResponseEntity<Page<SubstanceDTO>> getAllPaginatedByState(
+            @RequestParam(required = false) String state,
+            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(service.getAllPaginatedByState(state, pageable));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<SubstanceDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));
