@@ -23,12 +23,18 @@ public class AnalysisDTO {
     private String number_protocol;
     private String description;
     private String date_analysis;
+
+    private String gradeFrac;
+    private String gradeHum;
+    private String color;
+    private String smell;
+    private String composition;
+
     private String result;
     private String macro;
     private String micro;
     private String state;
     private UserDTO user;
-    private TemplateDTO template;
     private PreAnalysisDTO preAnalysis;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

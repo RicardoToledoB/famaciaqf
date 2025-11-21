@@ -24,6 +24,10 @@ public class PreAnalysisEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String weight_sampled;
+
+    private String weightContra;
+    private String weightDestruction;
+
     @Column(columnDefinition = "TEXT")
     private String observation;
 

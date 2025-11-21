@@ -19,6 +19,8 @@ import java.time.LocalDateTime;
 public class PreAnalysisDTO {
     private Integer id;
     private String weight_sampled;
+    private String weightContra;
+    private String weightDestruction;
     private String observation;
     private ReceptionDTO reception;
     private SubstanceDTO substance;

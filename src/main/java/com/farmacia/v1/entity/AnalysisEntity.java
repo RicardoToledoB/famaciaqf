@@ -41,13 +41,22 @@ public class AnalysisEntity {
 
     private String state;
 
+    private String gradeFrac;
+
+    private String gradeHum;
+
+    private String color;
+
+    private String smell;
+
+    @Column(columnDefinition = "TEXT")
+    private String composition;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private UserEntity user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="template_id")
-    private TemplateEntity template;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="pre_analysis_id")

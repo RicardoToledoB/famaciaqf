@@ -21,6 +21,13 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     private PreAnalysisRepository repository;
 
 
+    /*
+      private String weightContra;
+    private String weightDestruction;
+
+    */
+
+
     private PreAnalysisDTO mapToDTO(PreAnalysisEntity entity) {
         return PreAnalysisDTO.builder()
                 .id(entity.getId())
@@ -28,6 +35,8 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .observation(entity.getObservation())
                 .reception(mapToReceptionDTO(entity.getReception()))
                 .substance(mapToSubstanceDTO(entity.getSubstance()))
+                .weightContra(entity.getWeightContra())
+                .weightDestruction(entity.getWeightDestruction())
                 .destination(mapToDestinationDTO(entity.getDestination()))
                 .methodDestruction(mapToMethodDestructionDTO(entity.getMethodDestruction()))
                 .user(mapToUserDTO(entity.getUser()))
@@ -37,11 +46,19 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .build();
     }
 
+    /*
+     private String weightContra;
+   private String weightDestruction;
+
+   */
+
     private PreAnalysisEntity mapToEntity(PreAnalysisDTO dto) {
         return PreAnalysisEntity.builder()
                 .id(dto.getId())
                 .weight_sampled(dto.getWeight_sampled())
                 .observation(dto.getObservation())
+                .weightContra(dto.getWeightContra())
+                .weightDestruction(dto.getWeightDestruction())
                 .reception(mapToReceptionEntity(dto.getReception()))
                 .substance(mapToSubstanceEntity(dto.getSubstance()))
                 .destination(mapToDestinationEntity(dto.getDestination()))
@@ -394,12 +411,21 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
         return mapToDTO(entity);
     }
 
+
+    /*
+    private String weightContra;
+  private String weightDestruction;
+
+  */
+
     @Override
     public PreAnalysisDTO update(Integer id, PreAnalysisDTO dto) {
         PreAnalysisEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setWeight_sampled(dto.getWeight_sampled());
         entity.setObservation(dto.getObservation());
+        entity.setWeightContra(dto.getWeightContra());
+        entity.setWeightDestruction(dto.getWeightDestruction());
         entity.setReception(mapToReceptionEntity(dto.getReception()));
         entity.setSubstance(mapToSubstanceEntity(dto.getSubstance()));
         entity.setDestination(mapToDestinationEntity(dto.getDestination()));

@@ -20,6 +20,19 @@ public class AnalysisServiceImpl implements IAnalysisService {
     @Autowired
     private AnalysisRepository repository;
 
+/*
+
+ private String gradeFrac;
+
+    private String gradeHum;
+
+    private String color;
+
+    private String smell;
+
+
+ */
+
 
     private AnalysisDTO mapToDTO(AnalysisEntity entity) {
         return AnalysisDTO.builder()
@@ -28,11 +41,14 @@ public class AnalysisServiceImpl implements IAnalysisService {
                 .description(entity.getDescription())
                 .date_analysis(entity.getDate_analysis())
                 .result(entity.getResult())
+                .gradeFrac(entity.getGradeFrac())
+                .gradeHum(entity.getGradeHum())
+                .color(entity.getColor())
+                .smell(entity.getSmell())
                 .macro(entity.getMacro())
                 .micro(entity.getMicro())
                 .state(entity.getState())
                 .user(mapToUserDTO(entity.getUser()))
-                .template(mapToTemplateDTO(entity.getTemplate()))
                 .preAnalysis(mapToPreAnalysisDTO(entity.getPreAnalysis()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
@@ -40,18 +56,34 @@ public class AnalysisServiceImpl implements IAnalysisService {
                 .build();
     }
 
+
+    /*
+
+ private String gradeFrac;
+
+    private String gradeHum;
+
+    private String color;
+
+    private String smell;
+
+
+ */
     private AnalysisEntity mapToEntity(AnalysisDTO dto) {
         return AnalysisEntity.builder()
                 .id(dto.getId())
                 .number_protocol(dto.getNumber_protocol())
                 .description(dto.getDescription())
                 .date_analysis(dto.getDate_analysis())
+                .gradeFrac(dto.getGradeFrac())
+                .gradeHum(dto.getGradeHum())
+                .color(dto.getColor())
+                .smell(dto.getSmell())
                 .result(dto.getResult())
                 .macro(dto.getMacro())
                 .micro(dto.getMicro())
                 .state(dto.getState())
                 .user(mapToUserEntity(dto.getUser()))
-                .template(mapToTemplateEntity(dto.getTemplate()))
                 .preAnalysis(mapToPreAnalysisEntity(dto.getPreAnalysis()))
                 .createdAt(dto.getCreatedAt())
                 .updatedAt(dto.getUpdatedAt())
@@ -453,6 +485,19 @@ public class AnalysisServiceImpl implements IAnalysisService {
         return mapToDTO(entity);
     }
 
+    /*
+
+ private String gradeFrac;
+
+    private String gradeHum;
+
+    private String color;
+
+    private String smell;
+
+
+ */
+
     @Override
     public AnalysisDTO update(Integer id, AnalysisDTO dto) {
         AnalysisEntity entity = repository.findById(id)
@@ -460,12 +505,15 @@ public class AnalysisServiceImpl implements IAnalysisService {
         entity.setNumber_protocol(entity.getNumber_protocol());
         entity.setDescription(dto.getDescription());
         entity.setDate_analysis(entity.getDate_analysis());
+        entity.setGradeFrac(dto.getGradeFrac());
+        entity.setGradeHum(dto.getGradeHum());
+        entity.setColor(entity.getColor());
+        entity.setSmell(dto.getSmell());
         entity.setResult(dto.getResult());
         entity.setMacro(dto.getMacro());
         entity.setMicro(dto.getMicro());
         entity.setState(dto.getState());
         entity.setUser(mapToUserEntity(dto.getUser()));
-        entity.setTemplate(mapToTemplateEntity(dto.getTemplate()));
         entity.setPreAnalysis(entity.getPreAnalysis());
         return mapToDTO(repository.save(entity));
     }
