@@ -27,6 +27,7 @@ public class AnalysisEntity {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "date_analysis")
     private String date_analysis;
 
     @Column(columnDefinition = "TEXT")
