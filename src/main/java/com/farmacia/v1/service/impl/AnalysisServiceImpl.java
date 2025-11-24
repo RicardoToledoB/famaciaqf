@@ -515,6 +515,7 @@ public class AnalysisServiceImpl implements IAnalysisService {
         entity.setMacro(dto.getMacro());
         entity.setMicro(dto.getMicro());
         entity.setState(dto.getState());
+        entity.setComposition(dto.getComposition());
         entity.setUser(mapToUserEntity(dto.getUser()));
         entity.setPreAnalysis(entity.getPreAnalysis());
         return mapToDTO(repository.save(entity));
