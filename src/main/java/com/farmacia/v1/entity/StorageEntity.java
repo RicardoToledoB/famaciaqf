@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Builder
 @SQLDelete(sql = "UPDATE storages SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
-public class StorageEntity {
+public class                                                                                                                                             StorageEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -504,12 +504,12 @@ public class AnalysisServiceImpl implements IAnalysisService {
     public AnalysisDTO update(Integer id, AnalysisDTO dto) {
         AnalysisEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        entity.setNumber_protocol(entity.getNumber_protocol());
+        entity.setNumber_protocol(dto.getNumber_protocol());
         entity.setDescription(dto.getDescription());
-        entity.setDate_analysis(entity.getDate_analysis());
+        entity.setDate_analysis(dto.getDate_analysis());
         entity.setGradeFrac(dto.getGradeFrac());
         entity.setGradeHum(dto.getGradeHum());
-        entity.setColor(entity.getColor());
+        entity.setColor(dto.getColor());
         entity.setSmell(dto.getSmell());
         entity.setResult(dto.getResult());
         entity.setMacro(dto.getMacro());
@@ -517,7 +517,7 @@ public class AnalysisServiceImpl implements IAnalysisService {
         entity.setState(dto.getState());
         entity.setComposition(dto.getComposition());
         entity.setUser(mapToUserEntity(dto.getUser()));
-        entity.setPreAnalysis(entity.getPreAnalysis());
+        entity.setPreAnalysis(mapToPreAnalysisEntity(dto.getPreAnalysis()));
         return mapToDTO(repository.save(entity));
     }
 

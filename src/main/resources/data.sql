@@ -4,6 +4,9 @@ INSERT INTO communes (name, created_at, updated_at, deleted_at) VALUES ('Porveni
 INSERT INTO communes (name, created_at, updated_at, deleted_at) VALUES ('Timaukel',         TIMESTAMP '2025-11-25 10:00:00', TIMESTAMP '2025-11-25 10:00:00', NULL);
 INSERT INTO communes (name, created_at, updated_at, deleted_at) VALUES ('San Gregorio',     TIMESTAMP '2025-11-25 10:00:00', TIMESTAMP '2025-11-25 10:00:00', NULL);
 
+INSERT INTO locations (name, created_at, updated_at, deleted_at) VALUES ('Servicio de Salud Magallanes',     TIMESTAMP '2025-11-25 10:00:00', TIMESTAMP '2025-11-25 10:00:00', NULL);
+
+
 
 INSERT INTO institutions (name, created_at, updated_at, deleted_at) VALUES ('Carabineros de Chile',         TIMESTAMP '2025-11-25 10:00:00', TIMESTAMP '2025-11-25 10:00:00', NULL);
 INSERT INTO institutions (name, created_at, updated_at, deleted_at) VALUES ('Policía de Investigaciones',   TIMESTAMP '2025-11-25 10:00:00', TIMESTAMP '2025-11-25 10:00:00', NULL);
