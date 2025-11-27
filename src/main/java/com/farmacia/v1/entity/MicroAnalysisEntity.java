@@ -11,50 +11,51 @@ import org.hibernate.annotations.Where;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="destructions_headers")
+@Table(name="microanalysis")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-@SQLDelete(sql = "UPDATE destructions_headers SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
+@SQLDelete(sql = "UPDATE microanalysis SET deleted_at = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deleted_at IS NULL")
-public class DestructionHeaderEntity {
-
+public class MicroAnalysisEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String act_number;
-    private String date_destruction;
+
+    private String ttgland;
+    private String ttnogland;
+    private String stomas;
+    private String celepi;
+    private String celresi;
+    private String cris;
+    @Column(columnDefinition = "TEXT")
+    private String conclution;
+
     @Column(columnDefinition = "TEXT")
     private String observation;
-    private String state;
 
-    private String weight;
+    private String date;
+
+    private String aumento;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="method_destruction_id")
-    private MethodDestructionEntity methodDestruction;
-
+    @JoinColumn(name="analysis_id")
+    private AnalysisEntity analysis;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private UserEntity user;
 
-
-
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-
-
     @PrePersist
     private void createdAt(){
         this.createdAt = LocalDateTime.now();
     }
-
     @PreUpdate
     private void updatedAt(){
         this.updatedAt = LocalDateTime.now();

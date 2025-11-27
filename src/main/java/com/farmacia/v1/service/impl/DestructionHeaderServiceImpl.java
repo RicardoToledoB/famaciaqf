@@ -34,6 +34,7 @@ public class DestructionHeaderServiceImpl implements IDestructionHeaderService {
                 .date_destruction(entity.getDate_destruction())
                 .observation(entity.getObservation())
                 .state(entity.getState())
+                .weight(entity.getWeight())
                 .methodDestruction(mapToMethodDestructionDTO(entity.getMethodDestruction()))
                 .user(mapToUserDTO(entity.getUser()))
                 .createdAt(entity.getCreatedAt())
@@ -49,6 +50,7 @@ public class DestructionHeaderServiceImpl implements IDestructionHeaderService {
                 .date_destruction(dto.getDate_destruction())
                 .observation(dto.getObservation())
                 .state(dto.getState())
+                .weight(dto.getWeight())
                 .methodDestruction(mapToMethodDestructionEntity(dto.getMethodDestruction()))
                 .user(mapToUserEntity(dto.getUser()))
                 .createdAt(dto.getCreatedAt())
@@ -125,6 +127,7 @@ public class DestructionHeaderServiceImpl implements IDestructionHeaderService {
         entity.setDate_destruction(dto.getDate_destruction());
         entity.setObservation(dto.getObservation());
         entity.setState(dto.getState());
+        entity.setWeight(dto.getWeight());
         entity.setMethodDestruction(mapToMethodDestructionEntity(dto.getMethodDestruction()));
         entity.setUser(mapToUserEntity(dto.getUser()));
         return mapToDTO(repository.save(entity));

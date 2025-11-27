@@ -3,9 +3,9 @@ package com.farmacia.v1.service.impl;
 import com.farmacia.v1.dto.*;
 import com.farmacia.v1.entity.*;
 import com.farmacia.v1.repository.AnalysisRepository;
-import com.farmacia.v1.repository.GradeRepository;
+import com.farmacia.v1.repository.MicroAnalysisRepository;
 import com.farmacia.v1.service.IAnalysisService;
-import com.farmacia.v1.service.IGradeService;
+import com.farmacia.v1.service.IMicroAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +15,69 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AnalysisServiceImpl implements IAnalysisService {
+public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
     @Autowired
-    private AnalysisRepository repository;
+    private MicroAnalysisRepository repository;
 
-    private AnalysisDTO mapToDTO(AnalysisEntity entity) {
+    /*
+     private String ttgland;
+    private String ttnogland;
+    private String stomas;
+    private String celepi;
+    private String celresi;
+    private String cris;
+    private String conclution;
+    private String observation;
+    private String date;
+    private String aumento;
+    private AnalysisEntity analysis;
+    private UserEntity user;
+     */
+
+    private MicroAnalysisDTO mapToDTO(MicroAnalysisEntity entity) {
+        return MicroAnalysisDTO.builder()
+                .id(entity.getId())
+                .ttgland(entity.getTtgland())
+                .ttnogland(entity.getTtnogland())
+                .stomas(entity.getStomas())
+                .celepi(entity.getCelepi())
+                .celresi(entity.getCelresi())
+                .conclution(entity.getConclution())
+                .observation(entity.getObservation())
+                .date(entity.getDate())
+                .aumento(entity.getAumento())
+                .analysis(mapToAnalysisDTO(entity.getAnalysis()))
+                .user(mapToUserDTO(entity.getUser()))
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+
+    private MicroAnalysisEntity mapToEntity(MicroAnalysisDTO dto) {
+        return MicroAnalysisEntity.builder()
+                .id(dto.getId())
+                .ttgland(dto.getTtgland())
+                .ttnogland(dto.getTtnogland())
+                .stomas(dto.getStomas())
+                .celepi(dto.getCelepi())
+                .celresi(dto.getCelresi())
+                .conclution(dto.getConclution())
+                .observation(dto.getObservation())
+                .date(dto.getDate())
+                .aumento(dto.getAumento())
+                .analysis(mapToAnalysisEntity(dto.getAnalysis()))
+                .user(mapToUserEntity(dto.getUser()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+
+    private AnalysisDTO mapToAnalysisDTO(AnalysisEntity entity) {
         return AnalysisDTO.builder()
                 .id(entity.getId())
                 .number_protocol(entity.getNumber_protocol())
@@ -44,7 +101,7 @@ public class AnalysisServiceImpl implements IAnalysisService {
     }
 
 
-    private AnalysisEntity mapToEntity(AnalysisDTO dto) {
+    private AnalysisEntity mapToAnalysisEntity(AnalysisDTO dto) {
         return AnalysisEntity.builder()
                 .id(dto.getId())
                 .number_protocol(dto.getNumber_protocol())
@@ -434,63 +491,58 @@ public class AnalysisServiceImpl implements IAnalysisService {
     }
 
 
-    private TemplateDTO mapToTemplateDTO(TemplateEntity entity) {
-        return TemplateDTO.builder()
-                .id(entity.getId())
-                .text_json(entity.getText_json())
-                .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
-                .deletedAt(entity.getDeletedAt())
-                .build();
-    }
-
-    private TemplateEntity mapToTemplateEntity(TemplateDTO dto) {
-        return TemplateEntity.builder()
-                .id(dto.getId())
-                .text_json(dto.getText_json())
-                .createdAt(dto.getCreatedAt())
-                .updatedAt(dto.getUpdatedAt())
-                .deletedAt(dto.getDeletedAt())
-                .build();
-    }
 
 
 
-    public AnalysisDTO create(AnalysisDTO dto) {
-        AnalysisEntity entity = repository.save(mapToEntity(dto));
+
+
+    public MicroAnalysisDTO create(MicroAnalysisDTO dto) {
+        MicroAnalysisEntity entity = repository.save(mapToEntity(dto));
         return mapToDTO(entity);
     }
 
+    /*
+    .ttgland(dto.getTtgland())
+                .ttnogland(dto.getTtnogland())
+                .stomas(dto.getStomas())
+                .celepi(dto.getCelepi())
+                .celresi(dto.getCelresi())
+                .conclution(dto.getConclution())
+                .observation(dto.getObservation())
+                .date(dto.getDate())
+                .aumento(dto.getAumento())
+                .analysis(mapToAnalysisEntity(dto.getAnalysis()))
+                .user(mapToUserEntity(dto.getUser()))
+     */
+
+
     @Override
-    public AnalysisDTO update(Integer id, AnalysisDTO dto) {
-        AnalysisEntity entity = repository.findById(id)
+    public MicroAnalysisDTO update(Integer id, MicroAnalysisDTO dto) {
+        MicroAnalysisEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        entity.setNumber_protocol(dto.getNumber_protocol());
-        entity.setDescription(dto.getDescription());
-        entity.setDate_analysis(dto.getDate_analysis());
-        entity.setGradeFrac(dto.getGradeFrac());
-        entity.setGradeHum(dto.getGradeHum());
-        entity.setColor(dto.getColor());
-        entity.setSmell(dto.getSmell());
-        entity.setResult(dto.getResult());
-        entity.setMacro(dto.getMacro());
-        entity.setMicro(dto.getMicro());
-        entity.setState(dto.getState());
-        entity.setComposition(dto.getComposition());
+        entity.setTtgland(dto.getTtgland());
+        entity.setTtnogland(dto.getTtnogland());
+        entity.setStomas(dto.getStomas());
+        entity.setCelepi(dto.getCelepi());
+        entity.setCelresi(dto.getCelresi());
+        entity.setConclution(dto.getConclution());
+        entity.setObservation(entity.getObservation());
+        entity.setDate(dto.getDate());
+        entity.setAumento(dto.getAumento());
+        entity.setAnalysis(mapToAnalysisEntity(dto.getAnalysis()));
         entity.setUser(mapToUserEntity(dto.getUser()));
-        entity.setPreAnalysis(mapToPreAnalysisEntity(dto.getPreAnalysis()));
         return mapToDTO(repository.save(entity));
     }
 
     @Override
-    public AnalysisDTO getById(Integer id) {
-        AnalysisEntity entity = repository.findById(id)
+    public MicroAnalysisDTO getById(Integer id) {
+        MicroAnalysisEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         return mapToDTO(entity);
     }
 
     @Override
-    public List<AnalysisDTO> getAll() {
+    public List<MicroAnalysisDTO> getAll() {
         return repository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -500,12 +552,12 @@ public class AnalysisServiceImpl implements IAnalysisService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
-    public Page<AnalysisDTO> getAllPaginated(Pageable pageable) {
+    public Page<MicroAnalysisDTO> getAllPaginated(Pageable pageable) {
         return repository.findAllPaginated(pageable)
                 .map(this::mapToDTO);
     }
 
-    public Page<AnalysisDTO> getAllPaginated(String name, Pageable pageable) {
+    public Page<MicroAnalysisDTO> getAllPaginated(String name, Pageable pageable) {
         return repository.search(name, pageable).map(this::mapToDTO);
     }
 
@@ -514,14 +566,14 @@ public class AnalysisServiceImpl implements IAnalysisService {
 
 
     /*Listar communas activas*/
-    public List<AnalysisDTO> listAll() {
+    public List<MicroAnalysisDTO> listAll() {
         return repository.findAllIncludingDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
 
-    public List<AnalysisDTO> listActive() {
+    public List<MicroAnalysisDTO> listActive() {
         return repository.findAllActive().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -529,14 +581,14 @@ public class AnalysisServiceImpl implements IAnalysisService {
 
 
 
-    public List<AnalysisDTO> listDeleted() {
+    public List<MicroAnalysisDTO> listDeleted() {
         return repository.findAllDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public void restore(Integer id) {
-        AnalysisEntity entity = repository.findAnyById(id)
+        MicroAnalysisEntity entity = repository.findAnyById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setDeletedAt(null);
         repository.save(entity);

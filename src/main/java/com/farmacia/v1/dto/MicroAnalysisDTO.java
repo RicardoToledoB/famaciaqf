@@ -1,7 +1,6 @@
 package com.farmacia.v1.dto;
 
-import com.farmacia.v1.entity.InstitutionTypeEntity;
-import com.farmacia.v1.entity.MethodDestructionEntity;
+import com.farmacia.v1.entity.AnalysisEntity;
 import com.farmacia.v1.entity.UserEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
@@ -18,15 +17,19 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DestructionHeaderDTO {
+public class MicroAnalysisDTO {
     private Integer id;
-    private String act_number;
-    private String date_destruction;
+    private String ttgland;
+    private String ttnogland;
+    private String stomas;
+    private String celepi;
+    private String celresi;
+    private String cris;
+    private String conclution;
     private String observation;
-    private String state;
-
-    private String weight;
-    private MethodDestructionDTO methodDestruction;
+    private String date;
+    private String aumento;
+    private AnalysisDTO analysis;
     private UserDTO user;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
