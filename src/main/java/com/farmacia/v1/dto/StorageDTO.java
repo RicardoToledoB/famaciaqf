@@ -24,6 +24,7 @@ public class StorageDTO {
     private String counter_sample_quantity;
     private String description;
     private SubstanceDTO substance;
+    private String state;
     private StorageLocationDTO storageLocation;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

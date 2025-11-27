@@ -26,6 +26,8 @@ public class                                                                    
     private String entry_date;
     private String sample_quantity;
     private String counter_sample_quantity;
+    private String state;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 

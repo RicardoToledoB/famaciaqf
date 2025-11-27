@@ -28,6 +28,7 @@ public class StorageServiceImpl implements IStorageService {
                 .sample_quantity(entity.getSample_quantity())
                 .counter_sample_quantity(entity.getCounter_sample_quantity())
                 .description(entity.getDescription())
+                .state(entity.getState())
                 .substance(mapToSubstanceDTO(entity.getSubstance()))
                 .storageLocation(mapToStorageLocationDTO(entity.getStorageLocation()))
                 .createdAt(entity.getCreatedAt())
@@ -43,6 +44,7 @@ public class StorageServiceImpl implements IStorageService {
                 .sample_quantity(dto.getSample_quantity())
                 .counter_sample_quantity(dto.getCounter_sample_quantity())
                 .description(dto.getDescription())
+                .state(dto.getState())
                 .substance(mapToSubstanceEntity(dto.getSubstance()))
                 .storageLocation(mapToStorageLocationEntity(dto.getStorageLocation()))
                 .createdAt(dto.getCreatedAt())
@@ -377,6 +379,7 @@ public class StorageServiceImpl implements IStorageService {
         entity.setSample_quantity(dto.getSample_quantity());
         entity.setCounter_sample_quantity(dto.getCounter_sample_quantity());
         entity.setDescription(dto.getDescription());
+        entity.setState(dto.getState());
         entity.setSubstance(mapToSubstanceEntity(dto.getSubstance()));
         entity.setStorageLocation(mapToStorageLocationEntity(dto.getStorageLocation()));
         return mapToDTO(repository.save(entity));
