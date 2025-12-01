@@ -30,6 +30,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
                 .weight_net(entity.getWeight_net())
                 .unity(entity.getUnity())
                 .state(entity.getState())
+                .nsubstance(entity.getNsubstance())
                 .reception(mapToReceptionDTO(entity.getReception()))
                 .substanceType(mapToSubstanceTypeDTO(entity.getSubstanceType()))
                 .packaging(mapToPackagingDTO(entity.getPackaging()))
@@ -49,6 +50,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
                 .weight_net(dto.getWeight_net())
                 .unity(dto.getUnity())
                 .state(dto.getState())
+                .nsubstance(dto.getNsubstance())
                 .reception(mapToReceptionEntity(dto.getReception()))
                 .substanceType(mapToSubstanceTypeEntity(dto.getSubstanceType()))
                 .packaging(mapToPackagingEntity(dto.getPackaging()))
@@ -339,6 +341,7 @@ public class SubstanceServiceImpl implements ISubstanceService {
         entity.setWeight_net(dto.getWeight_net());
         entity.setUnity(dto.getUnity());
         entity.setState(dto.getState());
+        entity.setNsubstance(dto.getNsubstance());
         entity.setReception(mapToReceptionEntity(dto.getReception()));
         entity.setSubstanceType(mapToSubstanceTypeEntity(dto.getSubstanceType()));
         entity.setPackaging(mapToPackagingEntity(dto.getPackaging()));

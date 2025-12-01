@@ -49,6 +49,8 @@ public class SubstanceEntity {
 
     private String state;
 
+    private String nsubstance;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")

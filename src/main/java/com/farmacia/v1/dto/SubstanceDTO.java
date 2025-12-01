@@ -20,6 +20,8 @@ public class SubstanceDTO {
     private String unity;
     private String state;
 
+    private String nsubstance;
+
     private ReceptionDTO reception;
     private SubstanceTypeDTO substanceType;
     private PackagingDTO packaging;
