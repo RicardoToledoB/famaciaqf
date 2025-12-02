@@ -167,4 +167,9 @@ public class FileController {
         for (byte b : hashBytes) sb.append(String.format("%02x", b));
         return sb.toString();
     }
+
+    @GetMapping("/by-reception/{receptionId}")
+    public ResponseEntity<List<FileDTO>> findByReception(@PathVariable Integer receptionId) {
+        return ResponseEntity.ok(service.findByReception(receptionId));
+    }
 }

@@ -41,4 +41,9 @@ public interface FileRepository extends JpaRepository<FileEntity, Integer> {
        WHERE (:receptionId IS NULL OR f.reception.id = :receptionId)
     """)
     Page<FileEntity> searchByReception(@Param("receptionId") Integer receptionId, Pageable pageable);
+
+
+    // activo (respeta @Where deleted_at IS NULL)
+    List<FileEntity> findByReception_Id(Integer receptionId);
+
 }

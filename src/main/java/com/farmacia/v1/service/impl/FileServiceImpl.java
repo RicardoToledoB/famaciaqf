@@ -142,4 +142,9 @@ public class FileServiceImpl implements IFileService {
     public Page<FileDTO> getAllPaginatedByReception(Integer receptionId, Pageable pageable) {
         return repository.searchByReception(receptionId, pageable).map(this::mapToDTO);
     }
+
+    public List<FileDTO> findByReception(Integer receptionId) {
+        return repository.findByReception_Id(receptionId)
+                .stream().map(this::mapToDTO).toList();
+    }
 }
