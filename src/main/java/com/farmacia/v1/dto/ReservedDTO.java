@@ -20,6 +20,8 @@ public class ReservedDTO {
     private Integer id;
     private String number;
     private AnalysisDTO analysis;
+    private String fiscal;
+    private String isp;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

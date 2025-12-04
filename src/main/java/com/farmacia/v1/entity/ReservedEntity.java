@@ -25,6 +25,9 @@ public class ReservedEntity {
     private Integer id;
     private String number;
 
+    private String fiscal;
+    private String isp;
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="analysis_id")

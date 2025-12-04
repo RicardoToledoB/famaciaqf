@@ -25,6 +25,8 @@ public class ReservedServiceImpl implements IReservedService {
         return ReservedDTO.builder()
                 .id(entity.getId())
                 .number(entity.getNumber())
+                .fiscal(entity.getFiscal())
+                .isp(entity.getIsp())
                 .analysis(mapToAnalysisDTO(entity.getAnalysis()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
@@ -36,6 +38,8 @@ public class ReservedServiceImpl implements IReservedService {
         return ReservedEntity.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())
+                .fiscal(dto.getFiscal())
+                .isp(dto.getIsp())
                 .analysis(mapToAnalysisEntity(dto.getAnalysis()))
                 .createdAt(dto.getCreatedAt())
                 .updatedAt(dto.getUpdatedAt())
@@ -468,6 +472,8 @@ public class ReservedServiceImpl implements IReservedService {
         ReservedEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setNumber(dto.getNumber());
+        entity.setFiscal(dto.getFiscal());
+        entity.setIsp(dto.getIsp());
         entity.setAnalysis(mapToAnalysisEntity(dto.getAnalysis()));
         return mapToDTO(repository.save(entity));
     }
