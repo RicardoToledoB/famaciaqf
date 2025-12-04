@@ -531,4 +531,11 @@ public class ReservedServiceImpl implements IReservedService {
         entity.setDeletedAt(null);
         repository.save(entity);
     }
+
+    public List<ReservedDTO> findByAnalysisId(Integer analysisId) {
+        return repository.findByAnalysis_Id(analysisId)
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
+    }
 }

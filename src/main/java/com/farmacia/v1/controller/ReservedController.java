@@ -74,4 +74,9 @@ public class ReservedController {
         service.restore(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/by-analysis/{analysisId}")
+    public ResponseEntity<List<ReservedDTO>> getByAnalysis(@PathVariable Integer analysisId) {
+        return ResponseEntity.ok(service.findByAnalysisId(analysisId));
+    }
 }

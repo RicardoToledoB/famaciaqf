@@ -38,4 +38,6 @@ public interface ReservedRepository extends JpaRepository<ReservedEntity,Integer
               OR LOWER(c.number) LIKE LOWER(CONCAT('%', :number, '%')))
     """)
     Page<ReservedEntity> search(@Param("number") String number, Pageable pageable);
+
+    List<ReservedEntity> findByAnalysis_Id(Integer analysisId);
 }
