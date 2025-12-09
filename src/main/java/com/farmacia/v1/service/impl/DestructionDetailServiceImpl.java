@@ -2,10 +2,10 @@ package com.farmacia.v1.service.impl;
 
 import com.farmacia.v1.dto.*;
 import com.farmacia.v1.entity.*;
-import com.farmacia.v1.repository.GradeRepository;
-import com.farmacia.v1.repository.StorageRepository;
-import com.farmacia.v1.service.IGradeService;
-import com.farmacia.v1.service.IStorageService;
+import com.farmacia.v1.repository.CommuneRepository;
+import com.farmacia.v1.repository.DestructionDetailRepository;
+import com.farmacia.v1.service.ICommuneService;
+import com.farmacia.v1.service.IDestructionDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +15,43 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class StorageServiceImpl implements IStorageService {
+public class DestructionDetailServiceImpl implements IDestructionDetailService {
 
     @Autowired
-    private StorageRepository repository;
+    private DestructionDetailRepository repository;
 
 
-    private StorageDTO mapToDTO(StorageEntity entity) {
+    private DestructionDetailDTO mapToDTO(DestructionDetailEntity entity) {
+        return DestructionDetailDTO.builder()
+                .id(entity.getId())
+                .state(entity.getState())
+                .weight(entity.getWeight())
+                .destructionHeader(mapToDestructionHeaderDTO(entity.getDestructionHeader()))
+                .storage(mapToStorageDTO(entity.getStorage()))
+                .substance(mapToSubstanceDTO(entity.getSubstance()))
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+
+
+    private DestructionDetailEntity mapToEntity(DestructionDetailDTO dto) {
+        return DestructionDetailEntity.builder()
+                .id(dto.getId())
+                .state(dto.getState())
+                .weight(dto.getWeight())
+                .destructionHeader(mapToDestructionHeaderEntity(dto.getDestructionHeader()))
+                .storage(mapToStorageEntity(dto.getStorage()))
+                .substance(mapToSubstanceEntity(dto.getSubstance()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+    private StorageDTO mapToStorageDTO(StorageEntity entity) {
         return StorageDTO.builder()
                 .id(entity.getId())
                 .entry_date(entity.getEntry_date())
@@ -37,7 +67,7 @@ public class StorageServiceImpl implements IStorageService {
                 .build();
     }
 
-    private StorageEntity mapToEntity(StorageDTO dto) {
+    private StorageEntity mapToStorageEntity(StorageDTO dto) {
         return StorageEntity.builder()
                 .id(dto.getId())
                 .entry_date(dto.getEntry_date())
@@ -270,39 +300,9 @@ public class StorageServiceImpl implements IStorageService {
     }
 
 
-    private UserDTO mapToUserDTO(UserEntity entity) {
-        return UserDTO.builder()
-                .id(entity.getId())
-                .firstName(entity.getFirstName())
-                .secondName(entity.getSecondName())
-                .firstLastName(entity.getFirstLastName())
-                .secondLastName(entity.getSecondLastName())
-                .email(entity.getEmail())
-                .username(entity.getUsername())
-                .password(entity.getPassword())
-                .rut(entity.getRut())
-                .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
-                .deletedAt(entity.getDeletedAt())
-                .build();
-    }
 
-    private UserEntity mapToUserEntity(UserDTO dto) {
-        return UserEntity.builder()
-                .id(dto.getId())
-                .firstName(dto.getFirstName())
-                .secondName(dto.getSecondName())
-                .firstLastName(dto.getFirstLastName())
-                .secondLastName(dto.getSecondLastName())
-                .email(dto.getEmail())
-                .username(dto.getUsername())
-                .password(dto.getPassword())
-                .rut(dto.getRut())
-                .createdAt(dto.getCreatedAt())
-                .updatedAt(dto.getUpdatedAt())
-                .deletedAt(dto.getDeletedAt())
-                .build();
-    }
+
+
 
     private SubstanceTypeDTO mapToSubstanceTypeDTO(SubstanceTypeEntity entity) {
         return SubstanceTypeDTO.builder()
@@ -365,37 +365,118 @@ public class StorageServiceImpl implements IStorageService {
     }
 
 
+    private DestructionHeaderDTO mapToDestructionHeaderDTO(DestructionHeaderEntity entity) {
+        return DestructionHeaderDTO.builder()
+                .id(entity.getId())
+                .act_number(entity.getAct_number())
+                .date_destruction(entity.getDate_destruction())
+                .observation(entity.getObservation())
+                .state(entity.getState())
+                .weight(entity.getWeight())
+                .methodDestruction(mapToMethodDestructionDTO(entity.getMethodDestruction()))
+                .user(mapToUserDTO(entity.getUser()))
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
 
+    private DestructionHeaderEntity mapToDestructionHeaderEntity(DestructionHeaderDTO dto) {
+        return DestructionHeaderEntity.builder()
+                .id(dto.getId())
+                .act_number(dto.getAct_number())
+                .date_destruction(dto.getDate_destruction())
+                .observation(dto.getObservation())
+                .state(dto.getState())
+                .weight(dto.getWeight())
+                .methodDestruction(mapToMethodDestructionEntity(dto.getMethodDestruction()))
+                .user(mapToUserEntity(dto.getUser()))
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
 
+    private MethodDestructionDTO mapToMethodDestructionDTO(MethodDestructionEntity entity) {
+        return MethodDestructionDTO.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
 
-    public StorageDTO create(StorageDTO dto) {
-        StorageEntity entity = repository.save(mapToEntity(dto));
+    private MethodDestructionEntity mapToMethodDestructionEntity(MethodDestructionDTO dto) {
+        return MethodDestructionEntity.builder()
+                .id(dto.getId())
+                .name(dto.getName())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+    private UserDTO mapToUserDTO(UserEntity entity) {
+        return UserDTO.builder()
+                .id(entity.getId())
+                .firstName(entity.getFirstName())
+                .secondName(entity.getSecondName())
+                .firstLastName(entity.getFirstLastName())
+                .secondLastName(entity.getSecondLastName())
+                .email(entity.getEmail())
+                .username(entity.getUsername())
+                .password(entity.getPassword())
+                .rut(entity.getRut())
+                .createdAt(entity.getCreatedAt())
+                .updatedAt(entity.getUpdatedAt())
+                .deletedAt(entity.getDeletedAt())
+                .build();
+    }
+
+    private UserEntity mapToUserEntity(UserDTO dto) {
+        return UserEntity.builder()
+                .id(dto.getId())
+                .firstName(dto.getFirstName())
+                .secondName(dto.getSecondName())
+                .firstLastName(dto.getFirstLastName())
+                .secondLastName(dto.getSecondLastName())
+                .email(dto.getEmail())
+                .username(dto.getUsername())
+                .password(dto.getPassword())
+                .rut(dto.getRut())
+                .createdAt(dto.getCreatedAt())
+                .updatedAt(dto.getUpdatedAt())
+                .deletedAt(dto.getDeletedAt())
+                .build();
+    }
+
+    public DestructionDetailDTO create(DestructionDetailDTO dto) {
+        DestructionDetailEntity entity = repository.save(mapToEntity(dto));
         return mapToDTO(entity);
     }
 
     @Override
-    public StorageDTO update(Integer id, StorageDTO dto) {
-        StorageEntity entity = repository.findById(id)
+    public DestructionDetailDTO update(Integer id, DestructionDetailDTO dto) {
+        DestructionDetailEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        entity.setEntry_date(dto.getEntry_date());
-        entity.setSample_quantity(dto.getSample_quantity());
-        entity.setCounter_sample_quantity(dto.getCounter_sample_quantity());
-        entity.setDescription(dto.getDescription());
         entity.setState(dto.getState());
+        entity.setWeight(dto.getWeight());
+        entity.setDestructionHeader(mapToDestructionHeaderEntity(dto.getDestructionHeader()));
         entity.setSubstance(mapToSubstanceEntity(dto.getSubstance()));
-        entity.setStorageLocation(mapToStorageLocationEntity(dto.getStorageLocation()));
+        entity.setStorage(mapToStorageEntity(dto.getStorage()));
         return mapToDTO(repository.save(entity));
     }
 
     @Override
-    public StorageDTO getById(Integer id) {
-        StorageEntity entity = repository.findById(id)
+    public DestructionDetailDTO getById(Integer id) {
+        DestructionDetailEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         return mapToDTO(entity);
     }
 
     @Override
-    public List<StorageDTO> getAll() {
+    public List<DestructionDetailDTO> getAll() {
         return repository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -405,12 +486,12 @@ public class StorageServiceImpl implements IStorageService {
     public void delete(Integer id) {
         repository.deleteById(id);
     }
-    public Page<StorageDTO> getAllPaginated(Pageable pageable) {
+    public Page<DestructionDetailDTO> getAllPaginated(Pageable pageable) {
         return repository.findAllPaginated(pageable)
                 .map(this::mapToDTO);
     }
 
-    public Page<StorageDTO> getAllPaginated(String name, Pageable pageable) {
+    public Page<DestructionDetailDTO> getAllPaginated(String name, Pageable pageable) {
         return repository.search(name, pageable).map(this::mapToDTO);
     }
 
@@ -419,14 +500,14 @@ public class StorageServiceImpl implements IStorageService {
 
 
     /*Listar communas activas*/
-    public List<StorageDTO> listAll() {
+    public List<DestructionDetailDTO> listAll() {
         return repository.findAllIncludingDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
 
-    public List<StorageDTO> listActive() {
+    public List<DestructionDetailDTO> listActive() {
         return repository.findAllActive().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -434,14 +515,14 @@ public class StorageServiceImpl implements IStorageService {
 
 
 
-    public List<StorageDTO> listDeleted() {
+    public List<DestructionDetailDTO> listDeleted() {
         return repository.findAllDeleted().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
     }
 
     public void restore(Integer id) {
-        StorageEntity entity = repository.findAnyById(id)
+        DestructionDetailEntity entity = repository.findAnyById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         entity.setDeletedAt(null);
         repository.save(entity);
