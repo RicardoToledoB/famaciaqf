@@ -35,7 +35,7 @@ public class DestructionDetailEntity {
     private SubstanceEntity substance;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="storage_id")
+    @JoinColumn(name="storage_id",nullable = true)
     private StorageEntity storage;
 
     private LocalDateTime createdAt;
