@@ -74,4 +74,11 @@ public class StorageController {
         service.restore(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/by-state/paginated")
+    public ResponseEntity<Page<StorageDTO>> findByStatePaginated(
+            @RequestParam String state,
+            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(service.findByState(state, pageable));
+    }
 }

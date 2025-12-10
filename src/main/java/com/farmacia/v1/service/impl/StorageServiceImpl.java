@@ -446,4 +446,9 @@ public class StorageServiceImpl implements IStorageService {
         entity.setDeletedAt(null);
         repository.save(entity);
     }
+
+    public Page<StorageDTO> findByState(String state, Pageable pageable) {
+        return repository.findByStateContainingIgnoreCase(state, pageable)
+                .map(this::mapToDTO);
+    }
 }

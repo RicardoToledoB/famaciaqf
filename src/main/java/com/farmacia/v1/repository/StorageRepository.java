@@ -38,4 +38,6 @@ public interface StorageRepository extends JpaRepository<StorageEntity,Integer> 
               OR LOWER(c.entry_date) LIKE LOWER(CONCAT('%', :entry_date, '%')))
     """)
     Page<StorageEntity> search(@Param("entry_date") String entry_date, Pageable pageable);
+
+    Page<StorageEntity> findByStateContainingIgnoreCase(String state, Pageable pageable);
 }
