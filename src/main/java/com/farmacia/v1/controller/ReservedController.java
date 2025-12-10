@@ -79,4 +79,18 @@ public class ReservedController {
     public ResponseEntity<List<ReservedDTO>> getByAnalysis(@PathVariable Integer analysisId) {
         return ResponseEntity.ok(service.findByAnalysisId(analysisId));
     }
+
+    @GetMapping("/by-number/paginated")
+    public ResponseEntity<Page<ReservedDTO>> findByNumberPaginated(
+            @RequestParam String number,
+            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(service.findByNumber(number, pageable));
+    }
+
+    @GetMapping("/by-analysis/{analysisId}/paginated")
+    public ResponseEntity<Page<ReservedDTO>> findByAnalysisPaginated(
+            @PathVariable Integer analysisId,
+            @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+        return ResponseEntity.ok(service.findByAnalysisId(analysisId, pageable));
+    }
 }

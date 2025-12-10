@@ -40,4 +40,11 @@ public interface ReservedRepository extends JpaRepository<ReservedEntity,Integer
     Page<ReservedEntity> search(@Param("number") String number, Pageable pageable);
 
     List<ReservedEntity> findByAnalysis_Id(Integer analysisId);
+
+    // Buscar paginado por número
+    Page<ReservedEntity> findByNumberContainingIgnoreCase(String number, Pageable pageable);
+
+    // Buscar paginado por analysis_id
+    Page<ReservedEntity> findByAnalysis_Id(Integer analysisId, Pageable pageable);
+
 }

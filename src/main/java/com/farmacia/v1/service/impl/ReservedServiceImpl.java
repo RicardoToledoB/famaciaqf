@@ -544,4 +544,14 @@ public class ReservedServiceImpl implements IReservedService {
                 .map(this::mapToDTO)
                 .toList();
     }
+
+    public Page<ReservedDTO> findByNumber(String number, Pageable pageable) {
+        return repository.findByNumberContainingIgnoreCase(number, pageable)
+                .map(this::mapToDTO);
+    }
+
+    public Page<ReservedDTO> findByAnalysisId(Integer analysisId, Pageable pageable) {
+        return repository.findByAnalysis_Id(analysisId, pageable)
+                .map(this::mapToDTO);
+    }
 }
