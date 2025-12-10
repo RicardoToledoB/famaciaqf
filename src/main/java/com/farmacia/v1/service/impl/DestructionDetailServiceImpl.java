@@ -527,4 +527,11 @@ public class DestructionDetailServiceImpl implements IDestructionDetailService {
         entity.setDeletedAt(null);
         repository.save(entity);
     }
+
+    public List<DestructionDetailDTO> findByDestructionHeaderId(Integer headerId) {
+        return repository.findByDestructionHeader_Id(headerId)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
+    }
 }

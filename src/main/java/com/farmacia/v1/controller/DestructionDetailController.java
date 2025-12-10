@@ -27,6 +27,11 @@ public class DestructionDetailController {
         return ResponseEntity.ok(service.create(dto));
     }
 
+    @GetMapping("/by-header/{headerId}")
+    public ResponseEntity<List<DestructionDetailDTO>> findByHeader(@PathVariable Integer headerId) {
+        return ResponseEntity.ok(service.findByDestructionHeaderId(headerId));
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<DestructionDetailDTO>> getAll() {
         return ResponseEntity.ok(service.listAll());

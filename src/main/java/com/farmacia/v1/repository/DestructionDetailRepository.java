@@ -38,4 +38,8 @@ public interface DestructionDetailRepository extends JpaRepository<DestructionDe
               OR LOWER(c.state) LIKE LOWER(CONCAT('%', :state, '%')))
     """)
     Page<DestructionDetailEntity> search(@Param("state") String state, Pageable pageable);
+
+    // Activos (respeta @Where deleted_at IS NULL)
+    List<DestructionDetailEntity> findByDestructionHeader_Id(Integer destructionHeaderId);
+
 }
