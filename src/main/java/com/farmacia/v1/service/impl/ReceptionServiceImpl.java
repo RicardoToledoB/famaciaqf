@@ -29,6 +29,7 @@ public class ReceptionServiceImpl implements IReceptionService {
                 .of_number(entity.getOf_number())
                 .of_number_date(entity.getOf_number_date())
                 .state(entity.getState())
+                .nParte(entity.getNParte())
                 .is_editable(entity.getIs_editable())
                 .location(mapToLocationDTO(entity.getLocation()))
                 .police(mapToPoliceDTO(entity.getPolice()))
@@ -48,6 +49,7 @@ public class ReceptionServiceImpl implements IReceptionService {
                 .of_number(dto.getOf_number())
                 .of_number_date(dto.getOf_number_date())
                 .state(dto.getState())
+                .nParte(dto.getNParte())
                 .is_editable(dto.getIs_editable())
                 .location(mapToLocationEntity(dto.getLocation()))
                 .police(mapToPoliceEntity(dto.getPolice()))
@@ -260,6 +262,7 @@ public class ReceptionServiceImpl implements IReceptionService {
         entity.setOf_number(dto.getOf_number());
         entity.setOf_number_date(dto.getOf_number_date());
         entity.setState(dto.getState());
+        entity.setNParte(dto.getNParte());
         entity.setIs_editable(dto.getIs_editable());
         entity.setLocation(mapToLocationEntity(dto.getLocation()));
         entity.setPolice(mapToPoliceEntity(dto.getPolice()));

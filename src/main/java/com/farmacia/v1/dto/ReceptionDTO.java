@@ -27,6 +27,8 @@ public class ReceptionDTO {
     private String state;
     private String is_editable;
 
+    private String nParte;
+
     private LocationDTO location;
     private PoliceDTO police;
     private UserDTO user_origin;

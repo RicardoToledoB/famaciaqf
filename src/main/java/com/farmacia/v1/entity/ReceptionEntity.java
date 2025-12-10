@@ -30,6 +30,8 @@ public class ReceptionEntity {
     private String state;
     private String is_editable;
 
+    private String nParte;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="location_id")
     private LocationEntity location;
