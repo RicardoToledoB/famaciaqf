@@ -33,6 +33,14 @@ public class AnalysisDTO {
     private String micro;
     private String state;
     private UserDTO user;
+
+    private boolean has_palmed_leaves;
+    private boolean has_leaf_remains;
+    private boolean has_stems;
+    private boolean has_roots;
+    private boolean has_seeds;
+    private boolean has_inflorescences;
+
     private PreAnalysisDTO preAnalysis;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -38,6 +38,14 @@ public class AnalysisEntity {
     private String gradeHum;
     private String color;
     private String smell;
+
+    private boolean has_palmed_leaves;
+    private boolean has_leaf_remains;
+    private boolean has_stems;
+    private boolean has_roots;
+    private boolean has_seeds;
+    private boolean has_inflorescences;
+
     @Column(columnDefinition = "TEXT")
     private String composition;
     @ManyToOne(fetch = FetchType.LAZY)

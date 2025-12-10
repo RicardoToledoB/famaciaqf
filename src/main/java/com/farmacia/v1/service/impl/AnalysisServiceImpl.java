@@ -34,6 +34,13 @@ public class AnalysisServiceImpl implements IAnalysisService {
                 .macro(entity.getMacro())
                 .micro(entity.getMicro())
                 .state(entity.getState())
+                .has_palmed_leaves(entity.isHas_palmed_leaves())
+                .has_leaf_remains(entity.isHas_leaf_remains())
+                .has_stems(entity.isHas_stems())
+                .has_roots(entity.isHas_roots())
+                .has_seeds(entity.isHas_seeds())
+                .has_inflorescences(entity.isHas_inflorescences())
+
                 .composition(entity.getComposition())
                 .user(mapToUserDTO(entity.getUser()))
                 .preAnalysis(mapToPreAnalysisDTO(entity.getPreAnalysis()))
@@ -58,6 +65,13 @@ public class AnalysisServiceImpl implements IAnalysisService {
                 .macro(dto.getMacro())
                 .micro(dto.getMicro())
                 .state(dto.getState())
+                .has_palmed_leaves(dto.isHas_palmed_leaves())
+                .has_leaf_remains(dto.isHas_leaf_remains())
+                .has_stems(dto.isHas_stems())
+                .has_roots(dto.isHas_roots())
+                .has_seeds(dto.isHas_seeds())
+                .has_inflorescences(dto.isHas_inflorescences())
+
                 .composition(dto.getComposition())
                 .user(mapToUserEntity(dto.getUser()))
                 .preAnalysis(mapToPreAnalysisEntity(dto.getPreAnalysis()))
@@ -476,6 +490,12 @@ public class AnalysisServiceImpl implements IAnalysisService {
         entity.setMacro(dto.getMacro());
         entity.setMicro(dto.getMicro());
         entity.setState(dto.getState());
+        entity.setHas_palmed_leaves(dto.isHas_palmed_leaves());
+        entity.setHas_leaf_remains(dto.isHas_leaf_remains());
+        entity.setHas_stems(dto.isHas_stems());
+        entity.setHas_roots(dto.isHas_roots());
+        entity.setHas_seeds(dto.isHas_seeds());
+        entity.setHas_inflorescences(dto.isHas_inflorescences());
         entity.setComposition(dto.getComposition());
         entity.setUser(mapToUserEntity(dto.getUser()));
         entity.setPreAnalysis(mapToPreAnalysisEntity(dto.getPreAnalysis()));
