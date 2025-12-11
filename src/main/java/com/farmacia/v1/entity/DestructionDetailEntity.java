@@ -34,10 +34,12 @@ public class DestructionDetailEntity {
     @JoinColumn(name="substance_id")
     private SubstanceEntity substance;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="storage_id",nullable = true)
     private StorageEntity storage;
 
+  
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")

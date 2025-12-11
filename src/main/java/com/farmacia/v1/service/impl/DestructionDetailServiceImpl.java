@@ -27,7 +27,9 @@ public class DestructionDetailServiceImpl implements IDestructionDetailService {
                 .state(entity.getState())
                 .weight(entity.getWeight())
                 .destructionHeader(mapToDestructionHeaderDTO(entity.getDestructionHeader()))
-                .storage(mapToStorageDTO(entity.getStorage()))
+                .storage(entity.getStorage() != null && entity.getStorage().getId() != null
+                        ? mapToStorageDTO(entity.getStorage())
+                        : null)
                 .substance(mapToSubstanceDTO(entity.getSubstance()))
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
@@ -43,7 +45,9 @@ public class DestructionDetailServiceImpl implements IDestructionDetailService {
                 .state(dto.getState())
                 .weight(dto.getWeight())
                 .destructionHeader(mapToDestructionHeaderEntity(dto.getDestructionHeader()))
-                .storage(mapToStorageEntity(dto.getStorage()))
+                .storage(dto.getStorage() != null && dto.getStorage().getId() != null
+                        ? mapToStorageEntity(dto.getStorage())
+                        : null)
                 .substance(mapToSubstanceEntity(dto.getSubstance()))
                 .createdAt(dto.getCreatedAt())
                 .updatedAt(dto.getUpdatedAt())
@@ -464,7 +468,9 @@ public class DestructionDetailServiceImpl implements IDestructionDetailService {
         entity.setWeight(dto.getWeight());
         entity.setDestructionHeader(mapToDestructionHeaderEntity(dto.getDestructionHeader()));
         entity.setSubstance(mapToSubstanceEntity(dto.getSubstance()));
-        entity.setStorage(mapToStorageEntity(dto.getStorage()));
+        entity.setStorage(dto.getStorage() != null && dto.getStorage().getId() != null
+                ? mapToStorageEntity(dto.getStorage())
+                : null);
         return mapToDTO(repository.save(entity));
     }
 
