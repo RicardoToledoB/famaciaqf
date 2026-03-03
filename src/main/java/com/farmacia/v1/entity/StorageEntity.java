@@ -28,6 +28,9 @@ public class                                                                    
     private String counter_sample_quantity;
     private String state;
 
+    private String measurement_type;
+    private String unit_quantity;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 

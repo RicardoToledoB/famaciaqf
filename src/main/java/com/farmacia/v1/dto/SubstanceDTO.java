@@ -22,6 +22,10 @@ public class SubstanceDTO {
 
     private String nsubstance;
 
+    private String measurement_type;
+    private String unit_quantity;
+
+
     private ReceptionDTO reception;
     private SubstanceTypeDTO substanceType;
     private PackagingDTO packaging;

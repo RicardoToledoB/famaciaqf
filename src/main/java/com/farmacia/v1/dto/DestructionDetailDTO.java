@@ -18,6 +18,8 @@ public class DestructionDetailDTO {
     private DestructionHeaderDTO destructionHeader;
     private SubstanceDTO substance;
     private StorageDTO storage;
+    private String measurement_type;
+    private String unit_quantity;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;

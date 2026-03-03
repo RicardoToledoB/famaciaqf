@@ -25,6 +25,8 @@ public class StorageDTO {
     private String description;
     private SubstanceDTO substance;
     private String state;
+    private String measurement_type;
+    private String unit_quantity;
     private StorageLocationDTO storageLocation;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

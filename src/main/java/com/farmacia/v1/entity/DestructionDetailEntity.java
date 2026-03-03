@@ -38,8 +38,10 @@ public class DestructionDetailEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="storage_id",nullable = true)
     private StorageEntity storage;
+    private String measurement_type;
+    private String unit_quantity;
 
-  
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")

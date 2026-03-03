@@ -51,6 +51,10 @@ public class SubstanceEntity {
 
     private String nsubstance;
 
+    private String measurement_type;
+    private String unit_quantity;
+
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @Column(name = "deleted_at")
