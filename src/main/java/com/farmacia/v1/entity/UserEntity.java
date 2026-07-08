@@ -31,6 +31,7 @@ public class UserEntity implements Serializable {
     private String secondLastName;
     @Column(unique = true)
     private String email;
+    @Column(unique = true)
     private String username;
     private String password;
     private String rut;

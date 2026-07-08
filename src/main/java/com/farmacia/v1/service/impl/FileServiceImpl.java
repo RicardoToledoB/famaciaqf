@@ -10,7 +10,6 @@ import com.farmacia.v1.repository.FileRepository;
 import com.farmacia.v1.repository.ReceptionRepository;
 import com.farmacia.v1.repository.UserRepository;
 import com.farmacia.v1.service.IFileService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -19,12 +18,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class FileServiceImpl implements IFileService {
 
     private final FileRepository repository;
     private final ReceptionRepository receptionRepository;
     private final UserRepository userRepository;
+
+    public FileServiceImpl(FileRepository repository,
+                           ReceptionRepository receptionRepository,
+                           UserRepository userRepository) {
+        this.repository = repository;
+        this.receptionRepository = receptionRepository;
+        this.userRepository = userRepository;
+    }
 
     private FileDTO mapToDTO(FileEntity e) {
         return FileDTO.builder()

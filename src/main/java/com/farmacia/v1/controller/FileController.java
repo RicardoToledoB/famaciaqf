@@ -8,7 +8,6 @@ import com.farmacia.v1.repository.FileRepository;
 import com.farmacia.v1.repository.ReceptionRepository;
 import com.farmacia.v1.repository.UserRepository;
 import com.farmacia.v1.service.impl.FileServiceImpl;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.*;
@@ -26,13 +25,22 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/files")
 @PreAuthorize("hasRole('ADMIN')")
-@RequiredArgsConstructor
 public class FileController {
 
     private final FileServiceImpl service;
     private final FileRepository repository;
     private final ReceptionRepository receptionRepository;
     private final UserRepository userRepository;
+
+    public FileController(FileServiceImpl service,
+                          FileRepository repository,
+                          ReceptionRepository receptionRepository,
+                          UserRepository userRepository) {
+        this.service = service;
+        this.repository = repository;
+        this.receptionRepository = receptionRepository;
+        this.userRepository = userRepository;
+    }
 
     private static final String UPLOAD_DIR = "uploads/files/";
 

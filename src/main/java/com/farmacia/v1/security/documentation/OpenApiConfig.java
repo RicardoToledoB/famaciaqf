@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Configuración de OpenAPI (Swagger UI) con autenticación JWT.
  *
- * 🔹 Muestra selector de entornos (Local / Railway)
+ * 🔹 Muestra selector de entornos (Local / Producción DSSM)
  * 🔹 Agrega "candadito" para autenticarse con Bearer Token (JWT)
  */
 @Configuration
@@ -42,7 +42,7 @@ public class OpenApiConfig {
                 // Servidores disponibles
                 .servers(List.of(
                         new Server().url("http://localhost:8080").description("Servidor Local"),
-                        new Server().url("https://famaciaqf-production.up.railway.app").description("Producción Railway")
+                        new Server().url("https://farmaciaqf-api.dssm.cl").description("Producción DSSM")
                 ))
                 // Agregar esquema y requisito de seguridad global
                 .addSecurityItem(securityRequirement)

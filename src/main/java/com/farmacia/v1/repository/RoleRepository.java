@@ -1,7 +1,6 @@
 package com.farmacia.v1.repository;
 
 import com.farmacia.v1.entity.RoleEntity;
-import com.farmacia.v1.entity.RoleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,6 +13,8 @@ import java.util.Optional;
 
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity,Integer> {
+
+    Optional<RoleEntity> findByName(String name);
     @Query(
             value = "SELECT * FROM roles c WHERE c.deleted_at IS NOT NULL",
             nativeQuery = true

@@ -3,7 +3,6 @@ package com.farmacia.v1.security;
 import com.farmacia.v1.entity.UserEntity;
 import com.farmacia.v1.repository.UserRepository;
 import com.farmacia.v1.repository.UserRoleRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
@@ -11,12 +10,16 @@ import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
 public class DatabaseUserDetailsService implements UserDetailsService {
 
 
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
+
+    public DatabaseUserDetailsService(UserRepository userRepository, UserRoleRepository userRoleRepository) {
+        this.userRepository = userRepository;
+        this.userRoleRepository = userRoleRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

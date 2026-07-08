@@ -16,12 +16,13 @@ public class CorsConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // 🔒 Dominios permitidos (ajusta a los tuyos reales)
+        // Dominios permitidos
+        // Ajustar aquí cuando se defina el dominio del frontend productivo.
         config.setAllowedOriginPatterns(List.of(
                 "http://localhost:4200",
                 "http://localhost:5173",
-                "https://*.up.railway.app",
-                "https://*"
+                "https://farmaciaqf-api.dssm.cl",
+                "https://*.dssm.cl"
         ));
 
         // ✅ Métodos permitidos
