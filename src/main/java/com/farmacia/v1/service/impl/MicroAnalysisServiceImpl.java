@@ -36,6 +36,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
      */
 
     private MicroAnalysisDTO mapToDTO(MicroAnalysisEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return MicroAnalysisDTO.builder()
                 .id(entity.getId())
                 .ttgland(entity.getTtgland())
@@ -43,6 +46,7 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
                 .stomas(entity.getStomas())
                 .celepi(entity.getCelepi())
                 .celresi(entity.getCelresi())
+                .cris(entity.getCris())
                 .conclution(entity.getConclution())
                 .observation(entity.getObservation())
                 .date(entity.getDate())
@@ -57,6 +61,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private MicroAnalysisEntity mapToEntity(MicroAnalysisDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return MicroAnalysisEntity.builder()
                 .id(dto.getId())
                 .ttgland(dto.getTtgland())
@@ -64,6 +71,7 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
                 .stomas(dto.getStomas())
                 .celepi(dto.getCelepi())
                 .celresi(dto.getCelresi())
+                .cris(dto.getCris())
                 .conclution(dto.getConclution())
                 .observation(dto.getObservation())
                 .date(dto.getDate())
@@ -78,6 +86,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private AnalysisDTO mapToAnalysisDTO(AnalysisEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return AnalysisDTO.builder()
                 .id(entity.getId())
                 .number_protocol(entity.getNumber_protocol())
@@ -102,6 +113,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private AnalysisEntity mapToAnalysisEntity(AnalysisDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return AnalysisEntity.builder()
                 .id(dto.getId())
                 .number_protocol(dto.getNumber_protocol())
@@ -125,6 +139,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PreAnalysisDTO mapToPreAnalysisDTO(PreAnalysisEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return PreAnalysisDTO.builder()
                 .id(entity.getId())
                 .weight_sampled(entity.getWeight_sampled())
@@ -141,6 +158,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PreAnalysisEntity mapToPreAnalysisEntity(PreAnalysisDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return PreAnalysisEntity.builder()
                 .id(dto.getId())
                 .weight_sampled(dto.getWeight_sampled())
@@ -158,6 +178,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private SubstanceDTO mapToSubstanceDTO(SubstanceEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return SubstanceDTO.builder()
                 .id(entity.getId())
                 .nue(entity.getNue())
@@ -174,6 +197,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private SubstanceEntity mapToSubstanceEntity(SubstanceDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return SubstanceEntity.builder()
                 .id(dto.getId())
                 .nue(dto.getNue())
@@ -190,6 +216,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private ReceptionDTO mapToReceptionDTO(ReceptionEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return ReceptionDTO.builder()
                 .id(entity.getId())
                 .number(entity.getNumber())
@@ -207,6 +236,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private ReceptionEntity mapToReceptionEntity(ReceptionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return ReceptionEntity.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())
@@ -224,6 +256,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private LocationDTO mapToLocationDTO(LocationEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return LocationDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -234,6 +269,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private LocationEntity mapToLocationEntity(LocationDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return LocationEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -244,6 +282,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PoliceDTO mapToPoliceDTO(PoliceEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return PoliceDTO.builder()
                 .id(entity.getId())
                 .firstName(entity.getFirstName())
@@ -262,6 +303,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PoliceEntity mapToPoliceEntity(PoliceDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return PoliceEntity.builder()
                 .id(dto.getId())
                 .firstName(dto.getFirstName())
@@ -280,6 +324,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private InstitutionTypeDTO mapToInstitutionTypeDTO(InstitutionTypeEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return InstitutionTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -292,6 +339,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private InstitutionTypeEntity mapToInstitutionTypeEntity(InstitutionTypeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return InstitutionTypeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -306,6 +356,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private CommuneDTO mapToCommuneDTO(CommuneEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return CommuneDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -316,6 +369,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private CommuneEntity mapToCommuneEntity(CommuneDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return CommuneEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -327,6 +383,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return InstitutionDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -337,6 +396,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return InstitutionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -350,6 +412,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private GradeDTO mapToGradeDTO(GradeEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return GradeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -362,6 +427,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private GradeEntity mapToGradeEntity(GradeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return GradeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -376,6 +444,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private UserDTO mapToUserDTO(UserEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return UserDTO.builder()
                 .id(entity.getId())
                 .firstName(entity.getFirstName())
@@ -393,6 +464,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private UserEntity mapToUserEntity(UserDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return UserEntity.builder()
                 .id(dto.getId())
                 .firstName(dto.getFirstName())
@@ -410,6 +484,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private SubstanceTypeDTO mapToSubstanceTypeDTO(SubstanceTypeEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return SubstanceTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -420,6 +497,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private SubstanceTypeEntity mapToSubstanceTypeEntity(SubstanceTypeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return SubstanceTypeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -430,6 +510,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PackagingDTO mapToPackagingDTO(PackagingEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return PackagingDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -440,6 +523,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private PackagingEntity mapToPackagingEntity(PackagingDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return PackagingEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -451,6 +537,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
 
 
     private DestinationDTO mapToDestinationDTO(DestinationEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return DestinationDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -461,6 +550,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private DestinationEntity mapToDestinationEntity(DestinationDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return DestinationEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -471,6 +563,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private MethodDestructionDTO mapToMethodDestructionDTO(MethodDestructionEntity entity) {
+        if (entity == null) {
+            return null;
+        }
         return MethodDestructionDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -481,6 +576,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
     }
 
     private MethodDestructionEntity mapToMethodDestructionEntity(MethodDestructionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         return MethodDestructionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -507,6 +605,7 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
                 .stomas(dto.getStomas())
                 .celepi(dto.getCelepi())
                 .celresi(dto.getCelresi())
+                .cris(dto.getCris())
                 .conclution(dto.getConclution())
                 .observation(dto.getObservation())
                 .date(dto.getDate())
@@ -525,8 +624,9 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
         entity.setStomas(dto.getStomas());
         entity.setCelepi(dto.getCelepi());
         entity.setCelresi(dto.getCelresi());
+        entity.setCris(dto.getCris());
         entity.setConclution(dto.getConclution());
-        entity.setObservation(entity.getObservation());
+        entity.setObservation(dto.getObservation());
         entity.setDate(dto.getDate());
         entity.setAumento(dto.getAumento());
         entity.setAnalysis(mapToAnalysisEntity(dto.getAnalysis()));
@@ -539,6 +639,15 @@ public class MicroAnalysisServiceImpl implements IMicroAnalysisService {
         MicroAnalysisEntity entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
         return mapToDTO(entity);
+    }
+
+
+    @Override
+    public List<MicroAnalysisDTO> getByAnalysisId(Integer analysisId) {
+        return repository.findByAnalysisId(analysisId)
+                .stream()
+                .map(this::mapToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override

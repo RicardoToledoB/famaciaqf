@@ -40,6 +40,12 @@ public class MicroAnalysisController {
         return ResponseEntity.ok(service.getAllPaginated(name, pageable));
     }
 
+
+    @GetMapping("/getByAnalysisId/{analysis_id}")
+    public ResponseEntity<List<MicroAnalysisDTO>> getByAnalysisId(@PathVariable("analysis_id") Integer analysisId) {
+        return ResponseEntity.ok(service.getByAnalysisId(analysisId));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<MicroAnalysisDTO> getById(@PathVariable Integer id) {
         return ResponseEntity.ok(service.getById(id));

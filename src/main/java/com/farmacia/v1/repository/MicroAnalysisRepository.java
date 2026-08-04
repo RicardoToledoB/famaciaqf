@@ -22,10 +22,10 @@ public interface MicroAnalysisRepository extends JpaRepository<MicroAnalysisEnti
     @Query("SELECT ur FROM MicroAnalysisEntity ur WHERE ur.deletedAt IS NULL")
     List<MicroAnalysisEntity> findAllActive();
 
-    @Query(value = "SELECT * FROM grades c WHERE c.id = :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM microanalysis c WHERE c.id = :id", nativeQuery = true)
     Optional<MicroAnalysisEntity> findAnyById(@Param("id") Integer id);
 
-    @Query(value = "SELECT * FROM grades", nativeQuery = true)
+    @Query(value = "SELECT * FROM microanalysis", nativeQuery = true)
     List<MicroAnalysisEntity> findAllIncludingDeleted();
 
     @Query("SELECT c FROM MicroAnalysisEntity c")
@@ -37,4 +37,12 @@ public interface MicroAnalysisRepository extends JpaRepository<MicroAnalysisEnti
               OR LOWER(c.ttgland) LIKE LOWER(CONCAT('%', :ttgland, '%')))
     """)
     Page<MicroAnalysisEntity> search(@Param("ttgland") String ttgland, Pageable pageable);
+
+    @Query("""
+       SELECT c FROM MicroAnalysisEntity c
+       WHERE c.analysis.id = :analysisId
+         AND c.deletedAt IS NULL
+       ORDER BY c.id DESC
+    """)
+    List<MicroAnalysisEntity> findByAnalysisId(@Param("analysisId") Integer analysisId);
 }
