@@ -72,11 +72,19 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private SubstanceDTO mapToSubstanceDTO(SubstanceEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
         return SubstanceDTO.builder()
                 .id(entity.getId())
                 .nue(entity.getNue())
                 .description(entity.getDescription())
                 .weight(entity.getWeight())
+                .weight_net(entity.getWeight_net())
+                .unity(entity.getUnity())
+                .state(entity.getState())
+                .nsubstance(entity.getNsubstance())
                 .reception(mapToReceptionDTO(entity.getReception()))
                 .substanceType(mapToSubstanceTypeDTO(entity.getSubstanceType()))
                 .packaging(mapToPackagingDTO(entity.getPackaging()))
@@ -90,11 +98,19 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private SubstanceEntity mapToSubstanceEntity(SubstanceDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return SubstanceEntity.builder()
                 .id(dto.getId())
                 .nue(dto.getNue())
                 .description(dto.getDescription())
                 .weight(dto.getWeight())
+                .weight_net(dto.getWeight_net())
+                .unity(dto.getUnity())
+                .state(dto.getState())
+                .nsubstance(dto.getNsubstance())
                 .reception(mapToReceptionEntity(dto.getReception()))
                 .substanceType(mapToSubstanceTypeEntity(dto.getSubstanceType()))
                 .packaging(mapToPackagingEntity(dto.getPackaging()))
