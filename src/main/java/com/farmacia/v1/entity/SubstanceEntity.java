@@ -23,6 +23,7 @@ public class SubstanceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "nue")
     private String nue;
     @Column(columnDefinition = "TEXT")
     private String description;
