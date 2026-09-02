@@ -21,6 +21,8 @@ public class CorsConfig {
         config.setAllowedOriginPatterns(List.of(
                 "http://localhost:4200",
                 "http://localhost:5173",
+                "http://ley20000.dssm.cl",
+                "https://ley20000.dssm.cl",
                 "https://farmaciaqf-api.dssm.cl",
                 "https://*.dssm.cl"
         ));
