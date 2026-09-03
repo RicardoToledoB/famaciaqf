@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import jakarta.persistence.EntityNotFoundException;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +21,20 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
     @Autowired
     private PreAnalysisRepository repository;
+
+    /**
+     * Evita que el listado completo falle cuando existe una referencia antigua
+     * hacia una entidad relacionada eliminada por soft-delete o inexistente.
+     * En ese caso se retorna null para la relación, sin interrumpir la respuesta
+     * completa del endpoint /api/v1/pre_analysis.
+     */
+    private <T> T safeMap(Supplier<T> mapper) {
+        try {
+            return mapper.get();
+        } catch (EntityNotFoundException ex) {
+            return null;
+        }
+    }
 
 
     /*
@@ -76,7 +92,7 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
             return null;
         }
 
-        return SubstanceDTO.builder()
+        return safeMap(() -> SubstanceDTO.builder()
                 .id(entity.getId())
                 .nue(entity.getNue())
                 .description(entity.getDescription())
@@ -94,7 +110,7 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private SubstanceEntity mapToSubstanceEntity(SubstanceDTO dto) {
@@ -124,7 +140,11 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private ReceptionDTO mapToReceptionDTO(ReceptionEntity entity) {
-        return ReceptionDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> ReceptionDTO.builder()
                 .id(entity.getId())
                 .number(entity.getNumber())
                 .date_reception(entity.getDate_reception())
@@ -137,10 +157,14 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private ReceptionEntity mapToReceptionEntity(ReceptionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return ReceptionEntity.builder()
                 .id(dto.getId())
                 .number(dto.getNumber())
@@ -158,16 +182,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private LocationDTO mapToLocationDTO(LocationEntity entity) {
-        return LocationDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> LocationDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private LocationEntity mapToLocationEntity(LocationDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return LocationEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -178,7 +210,11 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private PoliceDTO mapToPoliceDTO(PoliceEntity entity) {
-        return PoliceDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> PoliceDTO.builder()
                 .id(entity.getId())
                 .firstName(entity.getFirstName())
                 .secondName(entity.getSecondName())
@@ -192,10 +228,14 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private PoliceEntity mapToPoliceEntity(PoliceDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return PoliceEntity.builder()
                 .id(dto.getId())
                 .firstName(dto.getFirstName())
@@ -214,7 +254,11 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private InstitutionTypeDTO mapToInstitutionTypeDTO(InstitutionTypeEntity entity) {
-        return InstitutionTypeDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> InstitutionTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .commune(mapToCommuneDTO(entity.getCommune()))
@@ -222,10 +266,14 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private InstitutionTypeEntity mapToInstitutionTypeEntity(InstitutionTypeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return InstitutionTypeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -240,16 +288,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private CommuneDTO mapToCommuneDTO(CommuneEntity entity) {
-        return CommuneDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> CommuneDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private CommuneEntity mapToCommuneEntity(CommuneDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return CommuneEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -261,16 +317,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private InstitutionDTO mapToInstitutionDTO(InstitutionEntity entity) {
-        return InstitutionDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> InstitutionDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private InstitutionEntity mapToInstitutionEntity(InstitutionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return InstitutionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -284,7 +348,11 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private GradeDTO mapToGradeDTO(GradeEntity entity) {
-        return GradeDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> GradeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .description(entity.getDescription())
@@ -292,10 +360,14 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private GradeEntity mapToGradeEntity(GradeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return GradeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -310,7 +382,11 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private UserDTO mapToUserDTO(UserEntity entity) {
-        return UserDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> UserDTO.builder()
                 .id(entity.getId())
                 .firstName(entity.getFirstName())
                 .secondName(entity.getSecondName())
@@ -323,10 +399,14 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private UserEntity mapToUserEntity(UserDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return UserEntity.builder()
                 .id(dto.getId())
                 .firstName(dto.getFirstName())
@@ -344,16 +424,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private SubstanceTypeDTO mapToSubstanceTypeDTO(SubstanceTypeEntity entity) {
-        return SubstanceTypeDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> SubstanceTypeDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private SubstanceTypeEntity mapToSubstanceTypeEntity(SubstanceTypeDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return SubstanceTypeEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -364,16 +452,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private PackagingDTO mapToPackagingDTO(PackagingEntity entity) {
-        return PackagingDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> PackagingDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private PackagingEntity mapToPackagingEntity(PackagingDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return PackagingEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -385,16 +481,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
 
 
     private DestinationDTO mapToDestinationDTO(DestinationEntity entity) {
-        return DestinationDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> DestinationDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private DestinationEntity mapToDestinationEntity(DestinationDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return DestinationEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
@@ -405,16 +509,24 @@ public class PreAnalysisServiceImpl implements IPreAnalysisService {
     }
 
     private MethodDestructionDTO mapToMethodDestructionDTO(MethodDestructionEntity entity) {
-        return MethodDestructionDTO.builder()
+        if (entity == null) {
+            return null;
+        }
+
+        return safeMap(() -> MethodDestructionDTO.builder()
                 .id(entity.getId())
                 .name(entity.getName())
                 .createdAt(entity.getCreatedAt())
                 .updatedAt(entity.getUpdatedAt())
                 .deletedAt(entity.getDeletedAt())
-                .build();
+                .build());
     }
 
     private MethodDestructionEntity mapToMethodDestructionEntity(MethodDestructionDTO dto) {
+        if (dto == null) {
+            return null;
+        }
+
         return MethodDestructionEntity.builder()
                 .id(dto.getId())
                 .name(dto.getName())
