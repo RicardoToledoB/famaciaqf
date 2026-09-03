@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/pre_analysis")
-@PreAuthorize("hasAnyRole('ADMIN', 'ADMINISTRATIVO')")
+@PreAuthorize("isAuthenticated()")
 public class PreAnalysisController {
 
     @Autowired
